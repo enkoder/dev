@@ -1,0 +1,1 @@
+locahost ansible_connection=local user=enkoder home_dir=/home/enkoder config_dir=/home/enkoder/.config
