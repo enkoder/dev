@@ -10,7 +10,6 @@
       - unzip
       - curl
       - network-manager
-      - i3-wm
       - xinit
       - tilda
       - xclip
@@ -22,6 +21,19 @@
       - curl
       - zsh
       - redshift
+        
+- hosts: all
+  tasks:
+  - apt_repository:
+      repo: ppa:kgilmer/speed-ricer
+
+  - name: Install i3-gaps & polybar
+    apt: name={{item}}
+    become: yes
+    become_user: root
+    with_items:
+      - i3-gaps
+      - polybar
         
 
 - hosts: all
@@ -111,39 +123,6 @@
       src: /tmp/op
       dest: /usr/local/bin/op
       state: hard
-
-
-- hosts: all
-  name: Install Polybar
-  tasks:
-  - name: Clone repo
-    git:
-      repo: 'https://github.com/polybar/polybar.git'
-      dest: '{{home_dir}}/github.com/polybar/polybar'
-
-  - name: Install system dependencies
-    apt: name={{item}}
-    with_items:
-      - cmake
-      - clang
-      - pkg-config
-      - libcairo2-dev
-      - libasound2-dev
-      - libcurl4-gnutls-dev
-      - libmpdclient-dev
-      - libiw-dev
-      - libpulse-dev
-      - libxcb-composite0-dev
-      - libxcb-randr0-dev
-      - xcb-proto
-      - python-xcbgen
-      - libxcb-icccm4-dev
-      - libxcb-image0-dev
-      - libxcb-ewmh-dev
-      - libxcb-util-dev
-      - libjsoncpp-dev
-      - fonts-font-awesome
- 
 
 - hosts: all
   name: Fetch ssh keys

@@ -23,6 +23,15 @@ client.background       #ffffff
 new_window pixel 5
 
 
+# gaps
+for_window [class=".*"] border pixel 0
+gaps inner 10
+gaps outer 3
+
+smart_gaps on
+smart_gaps inverse_outer
+
+
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
