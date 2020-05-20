@@ -1,6 +1,5 @@
 alias pacup="yaourt -Syua --noconfirm"
 alias gr="cd '$(git rev-parse --show-toplevel)'"
-alias vim="nvim"
 alias c="cd $CODE_DIR"
 alias gf="git fetch --prune --tags"
 alias gbc='git branch --merged | grep -v "\*" | grep -v master | grep -v develop | grep -v release | xargs -n 1 git branch -d && git remote prune origin'

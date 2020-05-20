@@ -185,5 +185,5 @@ bindsym XF86AudioMute exec amixer -D pulse set Master Playback Switch toggle
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
-# Arch background wallpaper
-# exec --no-startup-id feh --bg-scale ~/.dotfiles/config/i3/wallpaper.jpg
+# background wallpaper
+exec --no-startup-id feh --bg-scale ~/wallpaper.png

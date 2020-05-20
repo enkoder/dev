@@ -21,6 +21,8 @@
       - curl
       - zsh
       - redshift
+      - fonts-powerline
+
         
 - hosts: all
   tasks:

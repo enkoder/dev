@@ -1,16 +1,22 @@
+#
+# Executes commands at login pre-zshrc.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+#
 # Browser
 #
 
 if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
-else
-  export TERM=xterm-256color
-  export BROWSER=chromium
 fi
 
 #
 # Editors
 #
+
 export EDITOR='vim'
 export VISUAL='vim'
 export PAGER='less'
@@ -30,7 +36,7 @@ fi
 # Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path
 
-# Set the the list of directories that cd searches.
+# Set the list of directories that cd searches.
 # cdpath=(
 #   $cdpath
 # )
@@ -38,6 +44,8 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
+  /usr/sbin
+  /sbin
   $path
 )
 
@@ -56,17 +64,4 @@ if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
 
-#
-# Temporary Files
-#
-
-if [[ ! -d "$TMPDIR" ]]; then
-  export TMPDIR="/tmp/$LOGNAME"
-  mkdir -p -m 700 "$TMPDIR"
-fi
-
-TMPPREFIX="${TMPDIR%/}/zsh"
-
-# Ubuntu make installation of Ubuntu Make binary symlink
-PATH=/home/enkoder/.local/share/umake/bin:$PATH
-
+export PATH="$HOME/.cargo/bin:$PATH"

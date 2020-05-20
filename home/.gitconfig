@@ -17,7 +17,7 @@
 [core]
     excludesfile = ~/.gitignore_global
     pager = less -FXRS -x2
-    editor = nvim
+    editor = vim
 [grep]
     extendRegexp = true
     lineNumber = true
@@ -47,3 +47,5 @@
 	required = true
 [http]
 	cookiefile = /home/enkoder/.gitcookies
+[url "\"git@github.com:\""]
+	insteadOf = \"https://github.com/\"
