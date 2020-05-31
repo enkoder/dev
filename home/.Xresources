@@ -1,0 +1,129 @@
+! Nord theme
+#define nord0 #2E3440
+#define nord1 #3B4252
+#define nord2 #434C5E
+#define nord3 #4C566A
+#define nord4 #D8DEE9
+#define nord5 #E5E9F0
+#define nord6 #ECEFF4
+#define nord7 #8FBCBB
+#define nord8 #88C0D0
+#define nord9 #81A1C1
+#define nord10 #5E81AC
+#define nord11 #BF616A
+#define nord12 #D08770
+#define nord13 #EBCB8B
+#define nord14 #A3BE8C
+#define nord15 #B48EAD
+
+!background nord0
+!foreground nord4
+
+*.background:   nord0
+*.foreground:   nord4
+*.cursorColor:  nord4
+*.fading: 35
+*.fadeColor: nord3
+
+*.color0: nord1
+*.color1: nord11
+*.color2: nord14
+*.color3: nord13
+*.color4: nord9
+*.color5: nord15
+*.color6: nord8
+*.color7: nord5
+*.color8: nord3
+*.color9: nord11
+*.color10: nord14
+*.color11: nord13
+*.color12: nord9
+*.color13: nord15
+*.color14: nord7
+*.color15: nord6
+
+
+! One dark
+!#define black #1E2127
+!#define grey #5C6370
+!#define red #E06C75
+!#define red_b #E06C75
+!#define green #98C379
+!#define green_b #98C379
+!#define orange #D19A66
+!#define orange_b #D19A66
+!#define blue #61AFEF
+!#define blue_b #61AFEF
+!#define magenta #C678DD
+!#define magenta_b #C678DD
+!#define cyan #56B6C2
+!#define cyan_b #56B6C2
+!#define white #ABB2BF
+!#define white_b #FFFFFF
+!#define highlight #3A3F4B
+!
+!
+!*.foreground:    white
+!*.background:    black
+!*.cursorColor:   grey
+!*.highlightColor: highlight
+!
+!! black and grey
+!*.color0: black
+!*.color8: grey
+!! red
+!*.color1: red
+!*.color9: red_b
+!! green
+!*.color2: green
+!*.color10: green_b
+!! Orange
+!*.color3: orange
+!*.color11: orange_b
+!! Blue
+!*.color4: blue
+!*.color12: blue_b
+!! Magenta
+!*.color5: magenta
+!*.color13: magenta_b
+!! Cyan
+!*.color6: cyan
+!*.color14: cyan_b
+!! White
+!*.color7: white
+!*.color15: white_b
+
+! Fonts
+Xft.dpi: 96
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+
+
+! URxvt
+URxvt*prel-ext-common: default,matcher
+! Fonts
+URxvt*font:                 xft:Monaco:regular:size=13,xft:3270Medium Nerd Font Mono:style=Medium
+!URxvt*font:                 xft:SFMono Nerd Font:style=Regular,xft:3270Medium Nerd Font Mono:style=Medium
+
+URxvt.letterSpace: 1
+! do not scroll with output
+URxvt.scrollTtyOutpu: false
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt.scrollWithBuffer: true
+! scroll back to the bottom on keypress
+URxvt.scrollTtyKeypress: true
+URxvt.saveLines: 1000000
+URxvt.scrollBar: false
+! Clickable URLs
+URxvt.url-launcher: google-chrome
+URxvt.matcher.button: 1
+! Use Control-Shift-V/C for X clipboard
+URxvt.iso14755: false
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+
+URxvt.background: nord0
+URxvt.foreground: nord4

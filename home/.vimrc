@@ -9,6 +9,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
+Plug 'joshdick/onedark.vim'
 call plug#end()
 
 " Mouse yo
@@ -19,6 +20,7 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set smarttab
+syntax on
 
 
 " add specific filetype settings
@@ -77,7 +79,8 @@ set scrolloff=2
 set number
 
 " also uses the X clipboard when yanking text
-set clipboard+=unnamedplus
+set clipboard=unnamed
+
 
 " sets the ctags location
 set tags=./tags;
@@ -154,10 +157,12 @@ nmap <Leader>hv <Plug>GitGutterPreviewHunk
 nmap <Leader>hn <Plug>GitGutterNextHunk
 nmap <Leader>hb <Plug>GitGutterPrevHunk
 nmap <Leader>ha <Plug>GitGutterStageHunk
-nmap <Leader>hr <Plug>GitGutterUndoHunk
+nmap <Leader>hr <Plug>(GitGutterUndoHunk)
 
 "===== airline =====
 set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#format = 1
 let g:airline#extensions = ['branch', 'virtualenv', 'bufferline']
+let g:airline_theme='onedark'
+

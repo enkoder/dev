@@ -30,6 +30,7 @@ gaps outer 3
 
 smart_gaps on
 smart_gaps inverse_outer
+border_radius 10
 
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
@@ -47,7 +48,7 @@ smart_gaps inverse_outer
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Return exec rxvt-unicode
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -182,8 +183,9 @@ bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
 bindsym XF86AudioMute exec amixer -D pulse set Master Playback Switch toggle
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness:w
+
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # background wallpaper
-exec --no-startup-id feh --bg-scale ~/wallpaper.png
+exec --no-startup-id feh --bg-fill ~/wallpaper.jpg
