@@ -1,32 +1,18 @@
 ---
-- name: Install zsh
+- name: Install Bash
   pacman:
-    name: zsh
-    update_cache: yes
+    name:
+      - bash
+      - bash-completion
+    state: present
+  tags:
+    - shell
 
-- hosts: all
-  name: Zprezto
-  vars:
-
-  tasks:
-  - name: Check if zprezto was cloned
-    stat:
-      path: zprezto_dir
-    register: zprezto
-
-- name: Clone zprezto
-  tags: zsh
-  when: zprezto.stat.exists == False
-  git:
-    repo: 'https://github.com/sorin-ionescu/prezto.git'
-    dest: '{{ home_dir }}/github.com/sorin-ionescu/prezto'
-    recursive: True
-
-- name: Symlink to home
-  tags: zsh
-  when: zprezto.stat.exists == False
-  file:
-    src: '{{ home_dir }}/github.com/sorin-ionescu/prezto'
-    dest: "{{ home_dir }}/.zprezto"
-    state: link
-    force: yes
+- name: Install ZSH
+  pacman:
+    name:
+      - zsh
+      - zsh-completions
+    state: present
+  tags:
+    - shell
