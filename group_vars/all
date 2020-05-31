@@ -9,6 +9,8 @@ hostname: enkoder-laptop
 
 aur:
     dir: aur
+    packages:
+        - spotfiy
 
 base_packages:
     - base-devel
