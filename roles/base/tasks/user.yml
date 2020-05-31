@@ -14,7 +14,9 @@
     shell: "{{ user.shell }}"
     update_password: on_create
     uid: "{{ user.uid }}"
-    groups: uucp
+    groups:
+      - uucp
+      - wheel
     append: yes
   tags:
     - user
