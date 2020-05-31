@@ -170,33 +170,6 @@
 #      content: "{{ id_rsa_pub.stdout }}"
 #
 #- hosts: all
-#  name: Zprezto
-#  vars:
-#    zprezto_dir: '{{home_dir}}/github.com/sorin-ionescu/prezto'
-#  tasks:
-#  - name: Check if zprezto was cloned
-#    stat:
-#      path: zprezto_dir
-#    register: zprezto
-#
-#  - name: Clone repo
-#    tags: zsh
-#    when: zprezto.stat.exists == False
-#    git:
-#      repo: 'https://github.com/sorin-ionescu/prezto.git'
-#      dest: '{{home_dir}}/github.com/sorin-ionescu/prezto'
-#      recursive: True
-#
-#  - name: Symlink to home
-#    tags: zsh
-#    when: zprezto.stat.exists == False
-#    file:
-#      src: '{{home_dir}}/github.com/sorin-ionescu/prezto'
-#      dest: "{{home_dir}}/.zprezto"
-#      state: link
-#      force: yes
-#
-#- hosts: all
 #  name: Discord
 #  vars:
 #    discord_dir: '/opt/discord'
