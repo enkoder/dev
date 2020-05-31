@@ -1,0 +1,8 @@
+user:
+    name: enkoder
+    uid: 1000
+    group: enkoder
+    shell: /usr/bin/zsh
+    email:  kodie.goodwin@gmail.net
+
+hostname: enkoder-laptop

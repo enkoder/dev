@@ -1,286 +1,297 @@
-- hosts: all
-  tasks:
-  - name: Install common apt packages
-    apt: name={{item}}
-    become: yes
-    become_user: root
-    with_items:
-      - htop
-      - software-properties-common
-      - unzip
-      - curl
-      - network-manager
-      - xinit
-      - tilda
-      - xclip
-      - rofi
-      - slim
-      - xbacklight
-      - font-manager
-      - tree
-      - curl
-      - zsh
-      - redshift
-      - fonts-powerline
-
-        
-- hosts: all
-  tasks:
-  - apt_repository:
-      repo: ppa:kgilmer/speed-ricer
-
-  - name: Install i3-gaps & polybar
-    apt: name={{item}}
-    become: yes
-    become_user: root
-    with_items:
-      - i3-gaps
-      - polybar
-        
-
-- hosts: all
-  name: Symlinks all dotfiles
-  tasks:
-  - name: Config create directories
-    file:
-      path: '{{config_dir}}/{{item.path}}'
-      state: directory
-      mode: '{{item.mode}}'
-    with_filetree: config/
-    when: item.state == 'directory'
-
-  - name: Symlink config files
-    file:
-      src: '{{item.src}}'
-      dest: '{{config_dir}}/{{item.path}}'
-      state: link
-      force: yes
-      mode: "{{item.mode}}"
-    with_filetree: config/
-    when: item.state == 'file'
-
-  - name: Symlink home files
-    file:
-      src: "{{item.src}}"
-      dest: "{{home_dir}}/{{item.path}}"
-      state: link
-      force: yes
-      mode: "{{item.mode}}"
-    with_filetree: home/
-    when: item.state == 'file'
-
-- hosts: all 
-  name: Install google chrome 
-  vars:
-    - apt_file: /etc/apt/sources.list.d/google-chrome.list
-  tasks:
-    - name: Does the Google apt file exist?
-      command: test -f {{apt_file}}
-      register: google_apt_exists
-      ignore_errors: True
-
-    - name: Add Google Chrome key
-      shell: wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-      when: google_apt_exists.rc == 1
-
-    - name: Add Google Chrome repo
-      copy: content="deb http://dl.google.com/linux/chrome/deb/ stable main" dest={{apt_file}} owner=root group=root mode=644
-      when: google_apt_exists.rc == 1
-
-    - name: Update apt cache
-      apt: update_cache=yes
-      when: google_apt_exists.rc == 1
-
-    - name: Install Google Chrome
-      apt: pkg=google-chrome-stable state=latest
+---
+- hosts: localhost
+  become: yes
+  roles:
+    - { role: base, tags: ['base'] }
+  vars_prompt:
+    - name: user_password
+      prompt: "Enter desired user password"
 
 
-- hosts: all
-  name: Install 1pass cmd line
-  vars: 
-  - version: v0.10.0
-  tasks:
-  - name: Check if op exists
-    stat: 
-      path: /usr/local/bin/op
-    register: op
-
-  - name: Download zip
-    when: op.stat.exists == False
-    get_url:
-      url: "https://cache.agilebits.com/dist/1P/op/pkg/{{ version }}/op_linux_amd64_v0.10.0.zip"
-      dest: "/tmp/op_linux_amd64_{{ version }}.zip"
-
-  - name: Unarchive zip
-    when: op.stat.exists == False
-    unarchive:
-      src: "/tmp/op_linux_amd64_{{ version }}.zip"
-      dest: /tmp
-
-  - name: Moves op to /usr/local/bin
-    when: op.stat.exists == False
-    file:
-      owner: "{{user}}"
-      group: "{{user}}"
-      src: /tmp/op
-      dest: /usr/local/bin/op
-      state: hard
-
-- hosts: all
-  name: Fetch ssh keys
-  vars:
-  tasks:
-  - command:
-      cmd: 'op get document id_rsa'
-    environment: 
-      OP_SESSION_my: "{{ lookup('env','OP_SESSION_my') }}"
-    register: id_rsa
-    tags: secrets
-
-
-  - name: Fetch ssh key
-    tags: secrets
-    copy:
-      dest: "{{ home_dir }}/.ssh/id_rsa"
-      content: "{{ id_rsa.stdout }}"
-      mode: '0600'
-
-  - command:
-      cmd: 'op get document id_rsa.pub'
-    environment: 
-      OP_SESSION_my: "{{ lookup('env','OP_SESSION_my') }}"
-    register: id_rsa_pub
-    tags: secrets
-
-
-  - name: Fetch ssh key
-    tags: secrets
-    copy:
-      dest: "{{ home_dir }}/.ssh/id_rsa.pub"
-      content: "{{ id_rsa_pub.stdout }}"
-
-- hosts: all
-  name: Zprezto
-  vars:
-    zprezto_dir: '{{home_dir}}/github.com/sorin-ionescu/prezto' 
-  tasks:
-  - name: Check if zprezto was cloned
-    stat: 
-      path: zprezto_dir
-    register: zprezto
-
-  - name: Clone repo
-    tags: zsh
-    when: zprezto.stat.exists == False
-    git:
-      repo: 'https://github.com/sorin-ionescu/prezto.git'
-      dest: '{{home_dir}}/github.com/sorin-ionescu/prezto'
-      recursive: True
-
-  - name: Symlink to home
-    tags: zsh
-    when: zprezto.stat.exists == False
-    file:
-      src: '{{home_dir}}/github.com/sorin-ionescu/prezto'
-      dest: "{{home_dir}}/.zprezto"
-      state: link
-      force: yes
-
-- hosts: all
-  name: Discord
-  vars:
-    discord_dir: '/opt/discord' 
-  tasks:
-  - name: Check if discord is installed
-    tags: discord
-    stat: 
-      path: '/usr/local/bin/discord'
-    register: discord
-
-  - name: Make discord dir
-    when: discord.stat.exists == False
-    tags: discord
-    become: yes
-    become_user: root
-    file: 
-      owner: "{{user}}"
-      group: "{{user}}"
-      path: '{{ discord_dir }}'
-      state: directory
-
-  - name: Download discord
-    when: discord.stat.exists == False
-    tags: discord
-    get_url:
-      url: 'https://discord.com/api/download/canary?platform=linux&format=tar.gz'
-      dest: '/tmp/discord.tar.gz'
-
-  - name: Unarchive discord
-    when: discord.stat.exists == False
-    tags: discord
-    unarchive:
-      owner: '{{user}}'
-      src: '/tmp/discord.tar.gz'
-      dest: '{{ discord_dir }}'
-      extra_opts: [--strip-components=1]
-
-  - name: Unarchive discord
-    when: discord.stat.exists == False
-    become: yes
-    become_user: root
-    tags: discord
-    file:
-      src: '/opt/discord/DiscordCanary'
-      dest: '/usr/local/bin/discord'
-      state: link
-      force: yes
- 
-- hosts: all
-  name: VSCode
-  vars:
-    vscode_dir: '/opt/vscode' 
-  tasks:
-  - name: Check if vscode is installed
-    tags: vscode
-    stat: 
-      path: '/usr/local/bin/code'
-    register: vscode
-
-  - name: Make vscode dir
-    when: vscode.stat.exists == False
-    tags: vscode
-    become: yes
-    become_user: root
-    file: 
-      owner: "{{user}}"
-      group: "{{user}}"
-      path: '{{ vscode_dir }}'
-      state: directory
-
-  - name: Download vscode
-    when: vscode.stat.exists == False
-    tags: vscode
-    get_url:
-      url: 'https://go.microsoft.com/fwlink/?LinkID=620884'
-      dest: '/tmp/vscode.tar.gz'
-
-  - name: Unarchive vscode
-    when: vscode.stat.exists == False
-    tags: vscode
-    unarchive:
-      owner: '{{user}}'
-      src: '/tmp/vscode.tar.gz'
-      dest: '{{ vscode_dir }}'
-      extra_opts: [--strip-components=1]
-
-  - name: Unarchive vscode
-    when: vscode.stat.exists == False
-    become: yes
-    become_user: root
-    tags: vscode
-    file:
-      src: '/opt/vscode/bin/code'
-      dest: '/usr/local/bin/code'
-      state: link
-      force: yes
-      
+#- hosts: all
+#  tasks:
+#  - name: Install common apt packages
+#    apt: name={{item}}
+#    become: yes
+#    become_user: root
+#    with_items:
+#      - htop
+#      - software-properties-common
+#      - unzip
+#      - curl
+#      - network-manager
+#      - xinit
+#      - tilda
+#      - xclip
+#      - rofi
+#      - slim
+#      - xbacklight
+#      - font-manager
+#      - tree
+#      - curl
+#      - zsh
+#      - redshift
+#      - fonts-powerline
+#
+#
+#- hosts: all
+#  tasks:
+#  - apt_repository:
+#      repo: ppa:kgilmer/speed-ricer
+#
+#  - name: Install i3-gaps & polybar
+#    apt: name={{item}}
+#    become: yes
+#    become_user: root
+#    with_items:
+#      - i3-gaps
+#      - polybar
+#
+#
+#- hosts: all
+#  name: Symlinks all dotfiles
+#  tasks:
+#  - name: Config create directories
+#    file:
+#      path: '{{config_dir}}/{{item.path}}'
+#      state: directory
+#      mode: '{{item.mode}}'
+#    with_filetree: config/
+#    when: item.state == 'directory'
+#
+#  - name: Symlink config files
+#    file:
+#      src: '{{item.src}}'
+#      dest: '{{config_dir}}/{{item.path}}'
+#      state: link
+#      force: yes
+#      mode: "{{item.mode}}"
+#    with_filetree: config/
+#    when: item.state == 'file'
+#
+#  - name: Symlink home files
+#    file:
+#      src: "{{item.src}}"
+#      dest: "{{home_dir}}/{{item.path}}"
+#      state: link
+#      force: yes
+#      mode: "{{item.mode}}"
+#    with_filetree: home/
+#    when: item.state == 'file'
+#
+#- hosts: all
+#  name: Install google chrome
+#  vars:
+#    - apt_file: /etc/apt/sources.list.d/google-chrome.list
+#  tasks:
+#    - name: Does the Google apt file exist?
+#      command: test -f {{apt_file}}
+#      register: google_apt_exists
+#      ignore_errors: True
+#
+#    - name: Add Google Chrome key
+#      shell: wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+#      when: google_apt_exists.rc == 1
+#
+#    - name: Add Google Chrome repo
+#      copy: content="deb http://dl.google.com/linux/chrome/deb/ stable main" dest={{apt_file}} owner=root group=root mode=644
+#      when: google_apt_exists.rc == 1
+#
+#    - name: Update apt cache
+#      apt: update_cache=yes
+#      when: google_apt_exists.rc == 1
+#
+#    - name: Install Google Chrome
+#      apt: pkg=google-chrome-stable state=latest
+#
+#
+#- hosts: all
+#  name: Install 1pass cmd line
+#  vars:
+#  - version: v0.10.0
+#  tasks:
+#  - name: Check if op exists
+#    stat:
+#      path: /usr/local/bin/op
+#    register: op
+#
+#  - name: Download zip
+#    when: op.stat.exists == False
+#    get_url:
+#      url: "https://cache.agilebits.com/dist/1P/op/pkg/{{ version }}/op_linux_amd64_v0.10.0.zip"
+#      dest: "/tmp/op_linux_amd64_{{ version }}.zip"
+#
+#  - name: Unarchive zip
+#    when: op.stat.exists == False
+#    unarchive:
+#      src: "/tmp/op_linux_amd64_{{ version }}.zip"
+#      dest: /tmp
+#
+#  - name: Moves op to /usr/local/bin
+#    when: op.stat.exists == False
+#    file:
+#      owner: "{{user}}"
+#      group: "{{user}}"
+#      src: /tmp/op
+#      dest: /usr/local/bin/op
+#      state: hard
+#
+#- hosts: all
+#  name: Fetch ssh keys
+#  vars:
+#  tasks:
+#  - command:
+#      cmd: 'op get document id_rsa'
+#    environment:
+#      OP_SESSION_my: "{{ lookup('env','OP_SESSION_my') }}"
+#    register: id_rsa
+#    tags: secrets
+#
+#
+#  - name: Fetch ssh key
+#    tags: secrets
+#    copy:
+#      dest: "{{ home_dir }}/.ssh/id_rsa"
+#      content: "{{ id_rsa.stdout }}"
+#      mode: '0600'
+#
+#  - command:
+#      cmd: 'op get document id_rsa.pub'
+#    environment:
+#      OP_SESSION_my: "{{ lookup('env','OP_SESSION_my') }}"
+#    register: id_rsa_pub
+#    tags: secrets
+#
+#
+#  - name: Fetch ssh key
+#    tags: secrets
+#    copy:
+#      dest: "{{ home_dir }}/.ssh/id_rsa.pub"
+#      content: "{{ id_rsa_pub.stdout }}"
+#
+#- hosts: all
+#  name: Zprezto
+#  vars:
+#    zprezto_dir: '{{home_dir}}/github.com/sorin-ionescu/prezto'
+#  tasks:
+#  - name: Check if zprezto was cloned
+#    stat:
+#      path: zprezto_dir
+#    register: zprezto
+#
+#  - name: Clone repo
+#    tags: zsh
+#    when: zprezto.stat.exists == False
+#    git:
+#      repo: 'https://github.com/sorin-ionescu/prezto.git'
+#      dest: '{{home_dir}}/github.com/sorin-ionescu/prezto'
+#      recursive: True
+#
+#  - name: Symlink to home
+#    tags: zsh
+#    when: zprezto.stat.exists == False
+#    file:
+#      src: '{{home_dir}}/github.com/sorin-ionescu/prezto'
+#      dest: "{{home_dir}}/.zprezto"
+#      state: link
+#      force: yes
+#
+#- hosts: all
+#  name: Discord
+#  vars:
+#    discord_dir: '/opt/discord'
+#  tasks:
+#  - name: Check if discord is installed
+#    tags: discord
+#    stat:
+#      path: '/usr/local/bin/discord'
+#    register: discord
+#
+#  - name: Make discord dir
+#    when: discord.stat.exists == False
+#    tags: discord
+#    become: yes
+#    become_user: root
+#    file:
+#      owner: "{{user}}"
+#      group: "{{user}}"
+#      path: '{{ discord_dir }}'
+#      state: directory
+#
+#  - name: Download discord
+#    when: discord.stat.exists == False
+#    tags: discord
+#    get_url:
+#      url: 'https://discord.com/api/download/canary?platform=linux&format=tar.gz'
+#      dest: '/tmp/discord.tar.gz'
+#
+#  - name: Unarchive discord
+#    when: discord.stat.exists == False
+#    tags: discord
+#    unarchive:
+#      owner: '{{user}}'
+#      src: '/tmp/discord.tar.gz'
+#      dest: '{{ discord_dir }}'
+#      extra_opts: [--strip-components=1]
+#
+#  - name: Unarchive discord
+#    when: discord.stat.exists == False
+#    become: yes
+#    become_user: root
+#    tags: discord
+#    file:
+#      src: '/opt/discord/DiscordCanary'
+#      dest: '/usr/local/bin/discord'
+#      state: link
+#      force: yes
+#
+#- hosts: all
+#  name: VSCode
+#  vars:
+#    vscode_dir: '/opt/vscode'
+#  tasks:
+#  - name: Check if vscode is installed
+#    tags: vscode
+#    stat:
+#      path: '/usr/local/bin/code'
+#    register: vscode
+#
+#  - name: Make vscode dir
+#    when: vscode.stat.exists == False
+#    tags: vscode
+#    become: yes
+#    become_user: root
+#    file:
+#      owner: "{{user}}"
+#      group: "{{user}}"
+#      path: '{{ vscode_dir }}'
+#      state: directory
+#
+#  - name: Download vscode
+#    when: vscode.stat.exists == False
+#    tags: vscode
+#    get_url:
+#      url: 'https://go.microsoft.com/fwlink/?LinkID=620884'
+#      dest: '/tmp/vscode.tar.gz'
+#
+#  - name: Unarchive vscode
+#    when: vscode.stat.exists == False
+#    tags: vscode
+#    unarchive:
+#      owner: '{{user}}'
+#      src: '/tmp/vscode.tar.gz'
+#      dest: '{{ vscode_dir }}'
+#      extra_opts: [--strip-components=1]
+#
+#  - name: Unarchive vscode
+#    when: vscode.stat.exists == False
+#    become: yes
+#    become_user: root
+#    tags: vscode
+#    file:
+#      src: '/opt/vscode/bin/code'
+#      dest: '/usr/local/bin/code'
+#      state: link
+#      force: yes
+#
+#
