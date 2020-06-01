@@ -20,7 +20,7 @@
 - name: Check if yay was cloned
   stat:
     path: /home/{{ user.name }}/github.com/yay
-  register: yay-git
+  register: yay_git
   tags:
     - aur
 
@@ -32,10 +32,10 @@
     - aur
 
 - name: Clone yay
-  when: yay-git.exists == False
+  when: yay_git.exists == False
   git:
     repo: 'https://aur.archlinux.org/yay.git'
-    dest: yay-git.path
+    dest: yay_git.path
   tags:
     - aur
 
@@ -43,7 +43,7 @@
   when: yay.exists == False
   shell:
     cmd: makepkg -i
-    chdir: yay-git.path
+    chdir: yay_git.path
   tags:
     - aur
 
