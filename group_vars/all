@@ -11,6 +11,7 @@ aur:
     dir: aur
     packages:
         - spotfiy
+        - monaco-powerline-font-git
 
 base_packages:
     - base-devel

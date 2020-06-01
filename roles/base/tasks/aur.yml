@@ -55,6 +55,7 @@
 - name: Install AUR base packages
   aur:
     name: "{{ aur.packages }}"
+    use: yay
     state: present
   become: yes
   become_user: "{{ user.name }}"
