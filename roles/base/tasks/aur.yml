@@ -37,6 +37,11 @@
     owner: "{{ user.name }}"
     group: "{{ user.name }}"
 
+- name: Install aur
+  pacman: name=go state=present
+  tags:
+    - aur
+
 - name: Install yay
   when: yay.rc != 0
   shell:
