@@ -4,6 +4,7 @@
   roles:
     - { role: systemd }
     - { role: base, tags: ['base'] }
+    - { role: repo, tags: ['repo'] }
     - { role: zprezto, tags: ['zprezto'] }
     - { role: x, tags: ['x'] }
     - { role: i3, tags: ['i3'] }

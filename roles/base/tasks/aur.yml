@@ -26,16 +26,11 @@
   git:
     repo: 'https://aur.archlinux.org/yay.git'
     dest: /home/{{ user.name }}/github.com/yay
+  become: yes
+  become_method: su
+  become_user: "{{ user.name }}"
   tags:
     - aur
-
-- name: Change owner to aur_builder
-  file:
-    path: /home/{{ user.name }}/github.com/yay
-    state: directory
-    recurse: yes
-    owner: "{{ user.name }}"
-    group: "{{ user.name }}"
 
 - name: Install aur
   pacman: name=go state=present

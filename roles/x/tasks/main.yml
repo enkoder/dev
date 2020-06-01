@@ -8,17 +8,17 @@
       - xorg-xrdb
 
 - name: Move xresources
-  copy:
-    src: Xresources
+  file:
+    src: "/home/{{ user.name }}/github.com/enkoder/dev/roles/x/files/Xresources"
     dest: "/home/{{ user.name }}/.Xresources"
-  notify:
-    - reload xrdb
+    state: hard
   tags:
     - x
 
 - name: Move xinit
-  copy:
-    src: xinit
+  file:
+    src: "/home/{{ user.name }}/github.com/enkoder/dev/roles/x/files/xinit"
     dest: "/home/{{ user.name }}/.xinit"
+    state: hard
   tags:
     - x

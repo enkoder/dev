@@ -2,17 +2,20 @@
 - name: Install i3-gap
   aur: name=i3-gaps-next-git
   become: yes
-  become_method: su
   become_user: "{{ user.name }}"
   tags:
     - i3
 
 - name: Make i3 config dir
   file: path=/home/{{ user.name }}/.config/i3 state=directory
+  become: yes
+  become_user: "{{ user.name }}"
 
 - name: Copy i3 config
   template:
     src: config.j2
     dest: /home/{{ user.name }}/.config/i3/config
+  become: yes
+  become_user: "{{ user.name }}"
   tags:
     - i3
