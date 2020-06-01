@@ -40,7 +40,7 @@
     - aur
 
 - name: Install yay
-  when: yay.exists == False
+  when: yay.rc != 0
   shell:
     cmd: makepkg -i
     chdir: yay_git.path
