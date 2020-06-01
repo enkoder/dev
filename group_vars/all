@@ -11,7 +11,6 @@ aur:
     dir: aur
     packages:
         - monaco-powerline-font-git
-        - spotfiy
 
 base_packages:
     - base-devel
@@ -27,3 +26,7 @@ base_packages:
     - tree
     - unzip
     - htop
+    - rxvt-unicode
+
+
+terminal: rxvt-unicode

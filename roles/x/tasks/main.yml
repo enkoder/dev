@@ -1,0 +1,24 @@
+---
+- name: Install Xorg
+  pacman:
+    state: present
+    name:
+      - xorg-server
+      - xorg-xinit
+      - xorg-xrdb
+
+- name: Move xresources
+  copy:
+    src: Xresources
+    dest: "/home/{{ user.name }}/.Xresources"
+  notify:
+    - reload xrdb
+  tags:
+    - x
+
+- name: Move xinit
+  copy:
+    src: xinit
+    dest: "/home/{{ user.name }}/.xinit"
+  tags:
+    - x
