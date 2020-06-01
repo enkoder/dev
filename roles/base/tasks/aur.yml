@@ -19,7 +19,7 @@
 
 - name: Check if yay was cloned
   stat:
-    path: /home/{{ user.name }}/github.com/yay
+    path: /root/github.com/yay
   register: yay_git
   tags:
     - aur
@@ -45,7 +45,7 @@
   when: yay.rc != 0
   shell:
     cmd: makepkg -i
-    chdir: /home/{{ user.name }}/github.com/yay
+    chdir: /root/github.com/yay
   become: yes
   become_user: aur_builder
   tags:
