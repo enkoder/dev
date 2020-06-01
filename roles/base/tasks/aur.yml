@@ -36,6 +36,8 @@
   git:
     repo: 'https://aur.archlinux.org/yay.git'
     dest: /root/github.com/yay
+  become: yes
+  become_user: aur_builder
   tags:
     - aur
 
