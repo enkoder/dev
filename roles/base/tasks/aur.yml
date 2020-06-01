@@ -17,9 +17,40 @@
   tags:
     - aur
 
+- name: Check if yay was cloned
+  stat:
+    path: /home/{{ user.name }}/github.com/yay
+  register: yay-git
+  tags:
+    - aur
+
+- name: Check is yay installed
+  shell: command -v yay >/dev/null 2>&1
+  register: yay
+  ignore_errors: yes
+  tags:
+    - aur
+
+- name: Clone yay
+  when: yay-git.exists == False
+  git:
+    repo: 'https://aur.archlinux.org/yay.git'
+    dest: yay-git.path
+  tags:
+    - aur
+
+- name: Install yay
+  when: yay.exists == False
+  shell:
+    cmd: makepkg -i
+    chdir: yay-git.path
+  tags:
+    - aur
+
 - name: Install AUR base packages
   aur:
     name: "{{ aur.packages }}"
+    state: present
   become: yes
   become_user: aur_builder
   tags:
