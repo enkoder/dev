@@ -35,22 +35,23 @@
   when: yay_git.stat.exists == False
   git:
     repo: 'https://aur.archlinux.org/yay.git'
-    dest: "{{ yay_git.stat.path }}"
+    dest: /root/github.com/yay
   tags:
     - aur
 
 - name: Change owner to aur_builder
   file:
-    path: "{{ yay_git.stat.path }}"
+    path: /root/github.com/yay
     state: directory
     recurse: yes
     owner: aur_builder
+    group: wheel
 
 - name: Install yay
   when: yay.rc != 0
   shell:
     cmd: makepkg -i
-    chdir: "{{ yay_git.stat.path }}"
+    chdir: /root/github.com/yay
   become: yes
   become_user: aur_builder
   tags:
