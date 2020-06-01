@@ -2,8 +2,9 @@
 - hosts: localhost
   become: yes
   roles:
-    - { role: base, tags: ['base'] }
     - { role: systemd }
+    - { role: base, tags: ['base'] }
+    - { role: zprezto, tags: ['zprezto'] }
   vars_prompt:
     - name: user_password
       prompt: "Enter desired user password"

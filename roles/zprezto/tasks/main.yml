@@ -1,0 +1,32 @@
+---
+- name: Check if zprezto was cloned
+  stat:
+    path: /home/{{ user.name }}/.zprezto
+  register: zprezto
+  tags:
+    - zprezto
+
+- name: Clone zprezto
+  tags: zsh
+  when: zprezto.stat.exists == False
+  git:
+    repo: 'https://github.com/sorin-ionescu/prezto.git'
+    dest: '/home/{{ user.name }}/github.com/sorin-ionescu/prezto'
+    recursive: True
+  become: yes
+  become_user: "{{ user.name }}"
+  tags:
+    - zprezto
+
+- name: Symlink to home
+  tags: zsh
+  when: zprezto.stat.exists == False
+  file:
+    src: '/home/{{ user.name }}/github.com/sorin-ionescu/prezto'
+    dest: zprezto.stat.path
+    state: link
+    force: yes
+  become: yes
+  become_user: "{{ user.name }}"
+  tags:
+    - zprezto
