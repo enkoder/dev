@@ -13,6 +13,13 @@
     - user
 
 - name: Copy sudo configuration
-  template: src=sudoers.j2 dest=/etc/sudoers mode=440 validate='visudo -cf %s'
+  vars:
+    user_group: "{{ user.name }}"
+  template:
+    src: sudoers.j2
+    dest: /etc/sudoers
+    mode: 440
+    validate: 'visudo -cf %s'
+
   tags:
     - sudo

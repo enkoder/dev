@@ -1,6 +1,6 @@
 ---
 - name: Install i3-gap
-  aur: name=13-gaps-next-git
+  yay: name=13-gaps-next-git
   tags:
     - i3
 
