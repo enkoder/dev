@@ -1,14 +1,4 @@
 ---
-- user:
-    name: aur_builder
-    group: wheel
-
-- lineinfile:
-    path: /etc/sudoers.d/11-install-aur_builder
-    line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
-    create: yes
-    validate: 'visudo -cf %s'
-
 - name: Create AUR directory
   file: path=/home/{{ user.name }}/{{ aur.dir }}
         state=directory
@@ -19,7 +9,7 @@
 
 - name: Check if yay was cloned
   stat:
-    path: /root/github.com/yay
+    path: /home/{{ user.name }}/github.com/yay
   register: yay_git
   tags:
     - aur
@@ -35,25 +25,25 @@
   when: yay_git.stat.exists == False
   git:
     repo: 'https://aur.archlinux.org/yay.git'
-    dest: /root/github.com/yay
+    dest: /home/{{ user.name }}/github.com/yay
   tags:
     - aur
 
 - name: Change owner to aur_builder
   file:
-    path: /root/github.com/yay
+    path: /home/{{ user.name }}/github.com/yay
     state: directory
     recurse: yes
-    owner: aur_builder
-    group: wheel
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
 
 - name: Install yay
   when: yay.rc != 0
   shell:
     cmd: makepkg -i
-    chdir: /root/github.com/yay
+    chdir: /home/{{ user.name }}/github.com/yay
   become: yes
-  become_user: aur_builder
+  become_user: "{{ user.name }}"
   tags:
     - aur
 
@@ -62,6 +52,6 @@
     name: "{{ aur.packages }}"
     state: present
   become: yes
-  become_user: aur_builder
+  become_user: "{{ user.name }}"
   tags:
     - aur

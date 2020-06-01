@@ -1,6 +1,8 @@
 ---
 - name: Install i3-gap
   aur: name=13-gaps-next-git
+  tags:
+    - i3
 
 - name: Copy i3 config
   template:
