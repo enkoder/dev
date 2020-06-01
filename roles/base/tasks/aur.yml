@@ -35,7 +35,7 @@
   when: yay_git.stat.exists == False
   git:
     repo: 'https://aur.archlinux.org/yay.git'
-    dest: yay_git.stat.path
+    dest: /home/{{ user.name }}/github.com/yay
   tags:
     - aur
 
@@ -43,7 +43,7 @@
   when: yay.rc != 0
   shell:
     cmd: makepkg -i
-    chdir: yay_git.stat.path
+    chdir: /home/{{ user.name }}/github.com/yay
   become: yes
   become_user: aur_builder
   tags:
