@@ -52,10 +52,20 @@
   tags:
     - aur
 
+- name: Upgrade aur
+  aur:
+    upgrade: yes
+    aur_only: yes
+  become: yes
+  become_method: su
+  become_user: "{{ user.name }}"
+  tags:
+    - aur
+
 - name: Install AUR base packages
-  yay:
+  aur:
     name: "{{ aur.packages }}"
-    state: present
+    state: latest
   become: yes
   become_method: su
   become_user: "{{ user.name }}"

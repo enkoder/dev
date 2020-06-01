@@ -1,6 +1,9 @@
 ---
 - name: Install i3-gap
-  yay: name=13-gaps-next-git
+  aur: name=i3-gaps-next-git
+  become: yes
+  become_method: su
+  become_user: "{{ user.name }}"
   tags:
     - i3
 
