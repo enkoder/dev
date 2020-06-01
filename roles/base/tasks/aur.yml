@@ -1,0 +1,26 @@
+---
+- user:
+    name: aur_builder
+    group: wheel
+
+- lineinfile:
+    path: /etc/sudoers.d/11-install-aur_builder
+    line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+    create: yes
+    validate: 'visudo -cf %s'
+
+- name: Create AUR directory
+  file: path=/home/{{ user.name }}/{{ aur.dir }}
+        state=directory
+        owner={{ user.name }}
+        group={{ user.group }}
+  tags:
+    - aur
+
+- name: Install AUR base packages
+  aur:
+    name: "{{ aur.packages }}"
+  become: yes
+  become_user: aur_builder
+  tags:
+    - aur
