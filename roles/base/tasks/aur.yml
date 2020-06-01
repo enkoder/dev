@@ -35,7 +35,7 @@
   when: yay_git.stat.exists == False
   git:
     repo: 'https://aur.archlinux.org/yay.git'
-    dest: /home/{{ user.name }}/github.com/yay
+    dest: /root/github.com/yay
   tags:
     - aur
 
