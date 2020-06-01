@@ -10,8 +10,8 @@ hostname: enkoder-laptop
 aur:
     dir: aur
     packages:
-        - spotfiy
         - monaco-powerline-font-git
+        - spotfiy
 
 base_packages:
     - base-devel

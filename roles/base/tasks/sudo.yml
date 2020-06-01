@@ -13,8 +13,6 @@
     - user
 
 - name: Copy sudo configuration
-  vars:
-    user_group: "{{ user.name }}"
   template:
     src: sudoers.j2
     dest: /etc/sudoers

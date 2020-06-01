@@ -57,6 +57,7 @@
     name: "{{ aur.packages }}"
     state: present
   become: yes
+  become_method: su
   become_user: "{{ user.name }}"
   tags:
     - aur
