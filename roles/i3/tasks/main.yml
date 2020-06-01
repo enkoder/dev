@@ -1,0 +1,10 @@
+---
+- name: Install i3-gap
+  aur: name=13-gaps-next-git
+
+- name: Copy i3 config
+  template:
+    src: config.j2
+    dest: /home/{{ user.name }}/config/i3/config
+  tags:
+    - i3
