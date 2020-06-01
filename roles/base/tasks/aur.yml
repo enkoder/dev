@@ -45,7 +45,7 @@
 - name: Install yay
   when: yay.rc != 0
   shell:
-    cmd: makepkg -i
+    cmd: makepkg -i -f --noconfirm
     chdir: /home/{{ user.name }}/github.com/yay
   become: yes
   become_user: "{{ user.name }}"
