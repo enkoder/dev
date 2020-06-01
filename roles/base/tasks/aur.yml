@@ -32,7 +32,7 @@
     - aur
 
 - name: Clone yay
-  when: yay_git.exists == False
+  when: yay_git.stat.exists == False
   git:
     repo: 'https://aur.archlinux.org/yay.git'
     dest: yay_git.path
