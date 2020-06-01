@@ -45,7 +45,6 @@
     state: directory
     recurse: yes
     owner: aur_builder
-    group: aur_builder
 
 - name: Install yay
   when: yay.rc != 0
