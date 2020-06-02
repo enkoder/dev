@@ -49,38 +49,6 @@
 #      - i3-gaps
 #      - polybar
 #
-#
-#- hosts: all
-#  name: Symlinks all dotfiles
-#  tasks:
-#  - name: Config create directories
-#    file:
-#      path: '{{config_dir}}/{{item.path}}'
-#      state: directory
-#      mode: '{{item.mode}}'
-#    with_filetree: config/
-#    when: item.state == 'directory'
-#
-#  - name: Symlink config files
-#    file:
-#      src: '{{item.src}}'
-#      dest: '{{config_dir}}/{{item.path}}'
-#      state: link
-#      force: yes
-#      mode: "{{item.mode}}"
-#    with_filetree: config/
-#    when: item.state == 'file'
-#
-#  - name: Symlink home files
-#    file:
-#      src: "{{item.src}}"
-#      dest: "{{home_dir}}/{{item.path}}"
-#      state: link
-#      force: yes
-#      mode: "{{item.mode}}"
-#    with_filetree: home/
-#    when: item.state == 'file'
-#
 #- hosts: all
 #  name: Install google chrome
 #  vars:
