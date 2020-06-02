@@ -1,0 +1,13 @@
+---
+- name:
+  pacman: name=feh state=present
+  become: yes
+
+- name: Symlinks wallpaper dir
+  file:
+    src: "{{ repo_path }}/roles/wallpapers/files"
+    dest: "/home/{{ user.name }}/wallpapers"
+    state: link
+    force: yes
+  tags:
+    - wallpapers

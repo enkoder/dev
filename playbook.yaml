@@ -6,6 +6,7 @@
     - { role: zprezto, tags: ['zprezto'] }
     - { role: x, tags: ['x'] }
     - { role: i3, tags: ['i3'] }
+    - { role: wallpapers, tags: ['wallpapers'] }
 
 
 #- hosts: all

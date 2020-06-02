@@ -35,6 +35,7 @@ base_packages:
     - xorg-server
     - xorg-xinit
     - xorg-xrdb
+    - feh
 
 
 terminal: urxvt
