@@ -1,0 +1,20 @@
+---
+- name: Install polybar
+  aur: name=polybar-git state=present
+  tags:
+    - polybar
+
+- name: Ensure polybar config dir exists
+  file: path=/home/{{ user.name }}/.config/polybar mode=directory
+
+- name: Symlink config files
+  file:
+    src: "{{item.src}}"
+    dest: "/home/{{ user.name }}/.config/polybar/{{item.path}}"
+    state: link
+    force: yes
+    mode: "{{item.mode}}"
+  with_filetree: '{{ repo_path }}/roles/polybar/files'
+  when: item.state == 'file'
+  tags:
+    - polybar
