@@ -32,7 +32,7 @@
   tags:
     - aur
 
-- name: Install aur
+- name: Install yay deps
   pacman: name=go state=present
   tags:
     - aur

@@ -1,0 +1,19 @@
+---
+- name: Link gitconfig
+  file:
+    src: '{{ repo }}/roles/git/files/gitconfig'
+    dest: /home/{{ user.name }}/.gitconfig
+    state: hard
+    force: true
+  tags:
+    - git
+
+- name: Symlinks all dotfiles
+  file:
+    src: "{{item.src}}"
+    dest: "/home/{{ user }}/{{item.path}}"
+    state: link
+    force: yes
+    mode: "{{item.mode}}"
+  with_filetree: ''{{ reop }}/roles/dotfiles/files
+  when: item.state == 'file'

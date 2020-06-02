@@ -12,9 +12,8 @@
   git:
     repo: 'https://github.com/sorin-ionescu/prezto.git'
     dest: '/home/{{ user.name }}/github.com/sorin-ionescu/prezto'
+    update: yes
     recursive: True
-  become: yes
-  become_user: "{{ user.name }}"
   tags:
     - zprezto
 
@@ -26,7 +25,5 @@
     dest: zprezto.stat.path
     state: link
     force: yes
-  become: yes
-  become_user: "{{ user.name }}"
   tags:
     - zprezto

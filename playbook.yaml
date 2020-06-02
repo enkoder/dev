@@ -1,17 +1,12 @@
 ---
 - hosts: localhost
-  become: yes
   roles:
-    - { role: systemd }
-    - { role: base, tags: ['base'] }
-    - { role: repo, tags: ['repo'] }
+    - { role: aur, tags: ['aur'] }
+    - { role: dotfiles, tags: ['dotfiles'] }
     - { role: zprezto, tags: ['zprezto'] }
     - { role: git, tags: ['git'] }
     - { role: x, tags: ['x'] }
     - { role: i3, tags: ['i3'] }
-  vars_prompt:
-    - name: user_password
-      prompt: "Enter desired user password"
 
 
 #- hosts: all

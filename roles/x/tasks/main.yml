@@ -1,6 +1,7 @@
 ---
 - name: Install Xorg
   pacman:
+    become: yes
     state: present
     name:
       - xorg-server
@@ -9,7 +10,7 @@
 
 - name: Move xresources
   file:
-    src: "/home/{{ user.name }}/github.com/enkoder/dev/roles/x/files/Xresources"
+    src: "{{ repo }}/roles/x/files/Xresources"
     dest: "/home/{{ user.name }}/.Xresources"
     state: hard
     force: true
@@ -18,7 +19,7 @@
 
 - name: Move xinit
   file:
-    src: "/home/{{ user.name }}/github.com/enkoder/dev/roles/x/files/xinit"
+    src: "{{ repo }}/roles/x/files/xinit"
     dest: "/home/{{ user.name }}/.xinit"
     state: hard
     force: true
