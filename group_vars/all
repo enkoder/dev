@@ -32,6 +32,9 @@ base_packages:
     - unzip
     - htop
     - rxvt-unicode
+    - xorg-server
+    - xorg-xinit
+    - xorg-xrdb
 
 
 terminal: urxvt
