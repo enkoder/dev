@@ -11,3 +11,10 @@
     force: yes
   tags:
     - wallpapers
+
+- name: Add feh to config file
+  lineinfile:
+    path: '/home/{{ user.name }}/.config/i3/config'
+    line: exec --no-startup-id feh --bg-fill ~/wallpapers/{{ wallpaper }}
+  tags:
+    - wallpapers
