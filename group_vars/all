@@ -1,9 +1,12 @@
 user:
-    name: enkoder
     uid: 1000
+    name: enkoder
     group: enkoder
     shell: /usr/bin/zsh
-    email:  kodie.goodwin@gmail.net
+    email:  kodiegoodwin@gmail.com
+    github: enkoder
+    first_name: Kodie
+    last_name: Goodwin
 
 hostname: enkoder-laptop
 

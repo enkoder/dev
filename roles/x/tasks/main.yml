@@ -12,6 +12,7 @@
     src: "/home/{{ user.name }}/github.com/enkoder/dev/roles/x/files/Xresources"
     dest: "/home/{{ user.name }}/.Xresources"
     state: hard
+    force: true
   tags:
     - x
 
@@ -20,5 +21,6 @@
     src: "/home/{{ user.name }}/github.com/enkoder/dev/roles/x/files/xinit"
     dest: "/home/{{ user.name }}/.xinit"
     state: hard
+    force: true
   tags:
     - x

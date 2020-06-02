@@ -15,6 +15,7 @@
   template:
     src: config.j2
     dest: /home/{{ user.name }}/.config/i3/config
+    force: true
   become: yes
   become_user: "{{ user.name }}"
   tags:

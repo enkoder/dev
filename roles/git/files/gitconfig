@@ -1,0 +1,64 @@
+[user]
+name = enkoder
+email = kodiegoodwin@gmail.com
+
+[github]
+user=enkoder
+
+[color]
+ui = auto
+diff = auto
+status = auto
+branch = auto
+interactive = auto
+
+[diff]
+whitespace = red reverse
+
+[branch]
+# set up 'git pull' to rebase instead of merge
+autosetuprebase = always
+
+[core]
+excludesfile = ~/.gitignore_global
+pager = less -FXRS -x2
+editor = vim
+
+[grep]
+extendRegexp = true
+lineNumber = true
+
+[alias]
+gs = status -s
+l = log --oneline --decorate --graph
+ls = log --oneline --decorate --graph --stat
+lall = log --oneline --decorate --graph --all
+fuckit = reset HEAD --hard
+diffc = diff --cached
+mkpatch-on = format-patch -M -n -s -o outgoing
+lfp = log --oneline --decorate --graph --first-parent
+wcp = whatchanged -p
+lnall = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+ln = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+
+[push]
+default = simple
+
+[rebase]
+autoSquash = true
+autoStash = true
+
+[url "git@github.com:"]
+insteadOf = https://github.com/
+
+[filter "lfs"]
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
+process = git-lfs filter-process
+required = true
+
+[http]
+cookiefile = /home/enkoder/.gitcookies
+
+[url "\"git@github.com:\""]
+insteadOf = \"https://github.com/\"
