@@ -1,19 +1,19 @@
 ---
 - name: Check if dev was cloned
   stat:
-    path: '{{ repo }}'
+    path: '{{ repo_path }}'
   register: repo
   tags:
     - repo
 
 - name: Make repo
-  file: path={{ repo | dirname }} state=directory
+  file: path={{ repo_path | dirname }} state=directory
 
 - name: Clone repo
   when: repo.stat.exists == False
   git:
     repo: 'https://github.com/enkoder/dev.git'
-    dest: '{{ repo }}'
+    dest: '{{ repo_path }}'
     recursive: True
     update: yes
   tags:

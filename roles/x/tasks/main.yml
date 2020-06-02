@@ -10,7 +10,7 @@
 
 - name: Move xresources
   file:
-    src: "{{ repo }}/roles/x/files/Xresources"
+    src: "{{ repo_path }}/roles/x/files/Xresources"
     dest: "/home/{{ user.name }}/.Xresources"
     state: hard
     force: true
@@ -19,7 +19,7 @@
 
 - name: Move xinit
   file:
-    src: "{{ repo }}/roles/x/files/xinit"
+    src: "{{ repo_path }}/roles/x/files/xinit"
     dest: "/home/{{ user.name }}/.xinit"
     state: hard
     force: true

@@ -4,7 +4,6 @@
     - { role: aur, tags: ['aur'] }
     - { role: dotfiles, tags: ['dotfiles'] }
     - { role: zprezto, tags: ['zprezto'] }
-    - { role: git, tags: ['git'] }
     - { role: x, tags: ['x'] }
     - { role: i3, tags: ['i3'] }
 

@@ -10,6 +10,8 @@ user:
 
 hostname: enkoder-laptop
 
+repo_path: /home/enkoder/github.com/enkoder/dev
+
 aur:
     dir: aur
     packages:
