@@ -11,19 +11,8 @@
   when: zprezto.stat.exists == False
   git:
     repo: 'https://github.com/sorin-ionescu/prezto.git'
-    dest: '/home/{{ user.name }}/github.com/sorin-ionescu/prezto'
+    dest: '/home/{{ user.name }}/.zprezto'
     update: yes
     recursive: True
-  tags:
-    - zprezto
-
-- name: Symlink to home
-  tags: zsh
-  when: zprezto.stat.exists == False
-  file:
-    src: '/home/{{ user.name }}/github.com/sorin-ionescu/prezto'
-    dest: zprezto.stat.path
-    state: link
-    force: yes
   tags:
     - zprezto
