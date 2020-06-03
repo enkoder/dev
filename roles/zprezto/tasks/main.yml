@@ -1,7 +1,7 @@
 ---
 - name: Check if zprezto was cloned
   stat:
-    path: /home/{{ user.name }}/.zprezto
+    path: '/home/{{ user.name }}/.zprezto'
   register: zprezto
   tags:
     - zprezto
