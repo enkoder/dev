@@ -9,6 +9,7 @@
     - { role: wallpapers, tags: ['wallpapers'] }
     - { role: polybar, tags: ['polybar'] }
     - { role: 1pass, tags: ['1pass'] }
+    - { role: ssh, tags: ['ssh'] }
 
 
 #- hosts: all
@@ -49,71 +50,6 @@
 #    with_items:
 #      - i3-gaps
 #      - polybar
-#
-#- hosts: all
-#  name: Install 1pass cmd line
-#  vars:
-#  - version: v0.10.0
-#  tasks:
-#  - name: Check if op exists
-#    stat:
-#      path: /usr/local/bin/op
-#    register: op
-#
-#  - name: Download zip
-#    when: op.stat.exists == False
-#    get_url:
-#      url: "https://cache.agilebits.com/dist/1P/op/pkg/{{ version }}/op_linux_amd64_v0.10.0.zip"
-#      dest: "/tmp/op_linux_amd64_{{ version }}.zip"
-#
-#  - name: Unarchive zip
-#    when: op.stat.exists == False
-#    unarchive:
-#      src: "/tmp/op_linux_amd64_{{ version }}.zip"
-#      dest: /tmp
-#
-#  - name: Moves op to /usr/local/bin
-#    when: op.stat.exists == False
-#    file:
-#      owner: "{{user}}"
-#      group: "{{user}}"
-#      src: /tmp/op
-#      dest: /usr/local/bin/op
-#      state: hard
-#
-#- hosts: all
-#  name: Fetch ssh keys
-#  vars:
-#  tasks:
-#  - command:
-#      cmd: 'op get document id_rsa'
-#    environment:
-#      OP_SESSION_my: "{{ lookup('env','OP_SESSION_my') }}"
-#    register: id_rsa
-#    tags: secrets
-#
-#
-#  - name: Fetch ssh key
-#    tags: secrets
-#    copy:
-#      dest: "{{ home_dir }}/.ssh/id_rsa"
-#      content: "{{ id_rsa.stdout }}"
-#      mode: '0600'
-#
-#  - command:
-#      cmd: 'op get document id_rsa.pub'
-#    environment:
-#      OP_SESSION_my: "{{ lookup('env','OP_SESSION_my') }}"
-#    register: id_rsa_pub
-#    tags: secrets
-#
-#
-#  - name: Fetch ssh key
-#    tags: secrets
-#    copy:
-#      dest: "{{ home_dir }}/.ssh/id_rsa.pub"
-#      content: "{{ id_rsa_pub.stdout }}"
-#
 #
 #- hosts: all
 #  name: VSCode

@@ -1,0 +1,30 @@
+---
+- name: Install openssh
+  pacman: name=openssh state=present
+
+- command:
+    cmd: 'op get document id_rsa'
+  environment:
+    OP_SESSION_my: "{{ lookup('env','OP_SESSION_my') }}"
+  register: id_rsa
+  tags: secrets
+
+- name: Fetch ssh key
+  tags: secrets
+  copy:
+    dest: "/home/{{ user.name }}/.ssh/id_rsa"
+    content: "{{ id_rsa.stdout }}"
+    mode: '0600'
+
+- command:
+    cmd: 'op get document id_rsa.pub'
+  environment:
+    OP_SESSION_my: "{{ lookup('env','OP_SESSION_my') }}"
+  register: id_rsa_pub
+  tags: secrets
+
+- name: Fetch ssh key
+  tags: secrets
+  copy:
+    dest: "/home/{{ user.name }}/.ssh/id_rsa.pub"
+    content: "{{ id_rsa_pub.stdout }}"
