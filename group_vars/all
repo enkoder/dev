@@ -21,6 +21,7 @@ aur:
 base_packages:
     - base-devel
     - acpi
+    - ntp
     - man-db
     - man-pages
     - pacman-contrib
@@ -36,7 +37,9 @@ base_packages:
     - xorg-server
     - xorg-xinit
     - xorg-xrdb
+    - xorg-xrandr
     - feh
+    - code
 
 
 terminal: urxvt
