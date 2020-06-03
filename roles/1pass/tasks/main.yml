@@ -25,10 +25,12 @@
 
 - name: Moves op to /usr/local/bin
   when: op.stat.exists == False
-  file:
-    owner: "{{user}}"
-    group: "{{user}}"
+  copy:
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
     src: /tmp/op
     dest: /usr/local/bin/op
+    mode: u+rwx
+  become: yes
   tags:
     - 1pass
