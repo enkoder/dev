@@ -3,7 +3,4 @@
 [ ] get-pip.py
 [ ] gcloud
 [ ] virtualbox
-[ ] docker
 [ ] display manager
-[ ] spotfiy
-[ ] firefox

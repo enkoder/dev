@@ -19,6 +19,7 @@ aur:
         - nerd-fonts-complete
         - font-manager
         - google-chrome
+        - spotify
 
 base_packages:
     - base-devel
@@ -42,6 +43,7 @@ base_packages:
     - xorg-xrandr
     - feh
     - code
+    - docker
 
 
 terminal: urxvt

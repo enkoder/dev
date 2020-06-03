@@ -5,9 +5,11 @@
     - { role: 1pass, tags: ['1pass'] }
     - { role: ssh, tags: ['ssh'] }
     - { role: dotfiles, tags: ['dotfiles'] }
+    - { role: vim, tags: ['vim'] }
     - { role: zprezto, tags: ['zprezto'] }
     - { role: x, tags: ['x'] }
     - { role: i3, tags: ['i3'] }
     - { role: wallpapers, tags: ['wallpapers'] }
     - { role: polybar, tags: ['polybar'] }
     - { role: rofi, tags: ['rofi'] }
+    - { role: docker, tags: ['docker'] }
