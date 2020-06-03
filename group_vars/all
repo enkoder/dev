@@ -16,6 +16,8 @@ aur:
     dir: aur
     packages:
         - monaco-powerline-font-git
+        - nerd-fonts-complete
+        - font-manager
         - google-chrome
 
 base_packages:
