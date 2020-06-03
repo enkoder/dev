@@ -6,7 +6,7 @@
     state: link
     force: yes
     mode: "{{item.mode}}"
-  with_filetree: '{{ repo_path }}/dotfiles/files'
+  with_filetree: '{{ repo_path }}/dotfiles'
   when: item.state == 'file'
   tags:
     - dotfiles
