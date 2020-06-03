@@ -2,14 +2,14 @@
 - hosts: localhost
   roles:
     - { role: aur, tags: ['aur'] }
+    - { role: 1pass, tags: ['1pass'] }
+    - { role: ssh, tags: ['ssh'] }
     - { role: dotfiles, tags: ['dotfiles'] }
     - { role: zprezto, tags: ['zprezto'] }
     - { role: x, tags: ['x'] }
     - { role: i3, tags: ['i3'] }
     - { role: wallpapers, tags: ['wallpapers'] }
     - { role: polybar, tags: ['polybar'] }
-    - { role: 1pass, tags: ['1pass'] }
-    - { role: ssh, tags: ['ssh'] }
 
 
 #- hosts: all
