@@ -1,5 +1,5 @@
 # TODO
-[ ] install i3-gaps
+[ ] install i3-rounded-gaps
 [ ] get-pip.py
 [ ] rofi
 [ ] Onepass

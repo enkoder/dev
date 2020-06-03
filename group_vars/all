@@ -16,6 +16,7 @@ aur:
     dir: aur
     packages:
         - monaco-powerline-font-git
+        - google-chrome
 
 base_packages:
     - base-devel
@@ -39,3 +40,4 @@ base_packages:
 
 
 terminal: urxvt
+op_version: 1.0.0

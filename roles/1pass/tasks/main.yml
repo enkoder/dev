@@ -1,0 +1,34 @@
+# TODO check if version has changed in config
+---
+- name: Check if op exists
+  stat:
+    path: /usr/local/bin/op
+  register: op
+  tags:
+    - 1pass
+
+- name: Download zip
+  when: op.stat.exists == False
+  get_url:
+    url: "https://cache.agilebits.com/dist/1P/op/pkg/v{{ op_version }}/op_linux_amd64_v{{ op_version }}.zip"
+    dest: "/tmp/op_linux_amd64_{{ op_version }}.zip"
+  tags:
+    - 1pass
+
+- name: Unarchive zip
+  when: op.stat.exists == False
+  unarchive:
+    src: "/tmp/op_linux_amd64_{{ op_version }}.zip"
+    dest: /tmp
+  tags:
+    - 1pass
+
+- name: Moves op to /usr/local/bin
+  when: op.stat.exists == False
+  file:
+    owner: "{{user}}"
+    group: "{{user}}"
+    src: /tmp/op
+    dest: /usr/local/bin/op
+  tags:
+    - 1pass

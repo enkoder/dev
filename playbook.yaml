@@ -8,6 +8,7 @@
     - { role: i3, tags: ['i3'] }
     - { role: wallpapers, tags: ['wallpapers'] }
     - { role: polybar, tags: ['polybar'] }
+    - { role: 1pass, tags: ['1pass'] }
 
 
 #- hosts: all
@@ -48,32 +49,6 @@
 #    with_items:
 #      - i3-gaps
 #      - polybar
-#
-#- hosts: all
-#  name: Install google chrome
-#  vars:
-#    - apt_file: /etc/apt/sources.list.d/google-chrome.list
-#  tasks:
-#    - name: Does the Google apt file exist?
-#      command: test -f {{apt_file}}
-#      register: google_apt_exists
-#      ignore_errors: True
-#
-#    - name: Add Google Chrome key
-#      shell: wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-#      when: google_apt_exists.rc == 1
-#
-#    - name: Add Google Chrome repo
-#      copy: content="deb http://dl.google.com/linux/chrome/deb/ stable main" dest={{apt_file}} owner=root group=root mode=644
-#      when: google_apt_exists.rc == 1
-#
-#    - name: Update apt cache
-#      apt: update_cache=yes
-#      when: google_apt_exists.rc == 1
-#
-#    - name: Install Google Chrome
-#      apt: pkg=google-chrome-stable state=latest
-#
 #
 #- hosts: all
 #  name: Install 1pass cmd line
@@ -139,54 +114,6 @@
 #      dest: "{{ home_dir }}/.ssh/id_rsa.pub"
 #      content: "{{ id_rsa_pub.stdout }}"
 #
-#- hosts: all
-#  name: Discord
-#  vars:
-#    discord_dir: '/opt/discord'
-#  tasks:
-#  - name: Check if discord is installed
-#    tags: discord
-#    stat:
-#      path: '/usr/local/bin/discord'
-#    register: discord
-#
-#  - name: Make discord dir
-#    when: discord.stat.exists == False
-#    tags: discord
-#    become: yes
-#    become_user: root
-#    file:
-#      owner: "{{user}}"
-#      group: "{{user}}"
-#      path: '{{ discord_dir }}'
-#      state: directory
-#
-#  - name: Download discord
-#    when: discord.stat.exists == False
-#    tags: discord
-#    get_url:
-#      url: 'https://discord.com/api/download/canary?platform=linux&format=tar.gz'
-#      dest: '/tmp/discord.tar.gz'
-#
-#  - name: Unarchive discord
-#    when: discord.stat.exists == False
-#    tags: discord
-#    unarchive:
-#      owner: '{{user}}'
-#      src: '/tmp/discord.tar.gz'
-#      dest: '{{ discord_dir }}'
-#      extra_opts: [--strip-components=1]
-#
-#  - name: Unarchive discord
-#    when: discord.stat.exists == False
-#    become: yes
-#    become_user: root
-#    tags: discord
-#    file:
-#      src: '/opt/discord/DiscordCanary'
-#      dest: '/usr/local/bin/discord'
-#      state: link
-#      force: yes
 #
 #- hosts: all
 #  name: VSCode
