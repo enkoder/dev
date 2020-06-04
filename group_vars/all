@@ -15,7 +15,7 @@ repo_path: /home/enkoder/github.com/enkoder/dev
 aur:
     dir: aur
     packages:
-        - monaco-powerline-font-git
+        - powerline-fonts-git
         - nerd-fonts-complete
         - font-manager
         - google-chrome
@@ -44,6 +44,7 @@ base_packages:
     - feh
     - code
     - docker
+    - python-pip
 
 
 terminal: urxvt

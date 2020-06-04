@@ -105,7 +105,7 @@ Xft.lcdfilter: lcddefault
 ! URxvt
 URxvt*prel-ext-common: default,matcher
 ! Fonts
-URxvt*font:                 xft:Monaco for Powerline:regular:size=13,xft:3270Medium Nerd Font Mono:style=Medium
+URxvt*font:                 xft:Source Code Pro for Powerline:regular:size=13,xft:Hack Nerd Font:style=Medium
 
 URxvt.letterSpace: 1
 ! do not scroll with output
