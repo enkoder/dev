@@ -31,3 +31,16 @@
     force: true
   tags:
     - i3
+
+- name:
+  pacman: name=feh state=present
+  become: yes
+
+- name: Symlinks wallpaper dir
+  file:
+    src: "{{ repo_path }}/roles/i3/wallpapers"
+    dest: "/home/{{ user.name }}/wallpapers"
+    state: link
+    force: yes
+  tags:
+    - wallpapers

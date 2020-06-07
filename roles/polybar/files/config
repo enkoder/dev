@@ -61,8 +61,8 @@ padding-right = 2
 padding-left = 2
 module-margin = 1
 
-font-0 = Monaco for Powerline:size=14
-font-1 = NotoMono Nerd Font:size=14
+font-0 = Source Code Pro for Powerline:size=14
+font-1 = Hack Nerd Font:size=14
 
 background = ${colors.background}
 foreground = ${colors.foreground}
