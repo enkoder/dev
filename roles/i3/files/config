@@ -3,7 +3,7 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -24,7 +24,7 @@ gaps outer 3
 
 smart_gaps on
 smart_gaps inverse_outer
-border_radius 10
+#border_radius 10
 
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
@@ -42,7 +42,7 @@ border_radius 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec {{ terminal }}
+bindsym $mod+Return exec urxvt
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -169,7 +169,7 @@ bindsym $mod+r mode "resize"
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Use slimlock for lock screen
-bindsym $mod+backslash exec slimlock
+bindsym $mod+backslash exec lock
 
 # Audio Controls
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
