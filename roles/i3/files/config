@@ -185,3 +185,6 @@ exec_always --no-startup-id feh --bg-fill --randomize ~/wallpapers
 
 # nocaps
 exec_always --no-startup-id setxkbmap -option ctrl:nocaps
+
+# audio check if muted with pavucontrol
+exec_always --no-startup-id pulseaudio --start

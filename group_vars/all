@@ -21,6 +21,7 @@ aur:
         - google-chrome
         - spotify
         - tlpui-git
+        - google-cloud-sdk
 
 base_packages:
     - base-devel
@@ -50,6 +51,8 @@ base_packages:
     - code
     - docker
     - python-pip
+    - pulseaudio
+    - pavucontrol
 
 
 terminal: urxvt
