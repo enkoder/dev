@@ -25,34 +25,47 @@ aur:
 
 base_packages:
     - base-devel
+    - ntp
+    - man-db
+    - man-pages
+    - pacman-contrib
+    - tree
+    - unzip
+    - htop
+
+    # power & laptop things
     - acpi
     - tlp
     - tlp-rdw
     - acpi_call
     - tp_smapi
-    - ntp
-    - man-db
-    - man-pages
-    - pacman-contrib
-    - tmux
-    - git
-    - rsync
-    - jq
-    - screen
-    - tree
-    - unzip
-    - htop
+
+    # terminal
     - rxvt-unicode
+
+    # i3 & x
     - xorg-server
     - xorg-xinit
     - xorg-xrdb
     - xorg-xrandr
     - feh
+
+    # dev things
     - code
     - docker
     - python-pip
+    - tmux
+    - git
+    - rsync
+    - jq
+    - screen
+
+    # audio
     - pulseaudio
     - pavucontrol
+
+    # video things
+    - arandr
 
 
 terminal: urxvt
