@@ -178,6 +178,10 @@ bindsym XF86AudioMute exec amixer -D pulse set Master Playback Switch toggle
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness:w
-
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
-exec --no-startup-id feh --bg-fill ~/wallpapers/nord-mountain.jpg
+
+# set up wallpaper
+exec_always --no-startup-id feh --bg-fill --randomize ~/wallpapers
+
+# nocaps
+exec_always --no-startup-id setxkbmap -option ctrl:nocaps
