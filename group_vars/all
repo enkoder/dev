@@ -20,10 +20,15 @@ aur:
         - font-manager
         - google-chrome
         - spotify
+        - tlpui-git
 
 base_packages:
     - base-devel
     - acpi
+    - tlp
+    - tlp-rdw
+    - acpi_call
+    - tp_smapi
     - ntp
     - man-db
     - man-pages
