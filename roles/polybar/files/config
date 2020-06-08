@@ -186,4 +186,3 @@ label-connected =  %local_ip%
 label-connected-foreground = ${colors.blue}
 label-disconnected =  [not plugged]
 label-disconnected-foreground = ${colors.red}
-

@@ -7,9 +7,9 @@
 
 - name: Make discord dir
   become: yes
-  file: 
+  file:
     name: "{{ discord_dir }}"
-    state: directory 
+    state: directory
     owner: "{{ user.name }}"
     group: "{{ user.name }}"
 

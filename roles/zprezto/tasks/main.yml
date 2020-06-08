@@ -7,7 +7,6 @@
     - zprezto
 
 - name: Clone zprezto
-  tags: zsh
   when: zprezto.stat.exists == False
   git:
     repo: 'https://github.com/sorin-ionescu/prezto.git'

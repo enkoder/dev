@@ -1,4 +1,17 @@
 ---
+- name: Install pip
+  pacman: name=python-pip state=present
+  tags:
+    - repo
+
+- name: Install linter
+  pip:
+    name:
+      - ansible-lint
+      - pre-commit
+  tags:
+    - repo
+
 - name: Check if dev was cloned
   stat:
     path: '{{ repo_path }}'
@@ -16,5 +29,15 @@
     dest: '{{ repo_path }}'
     recursive: True
     update: yes
+  tags:
+    - repo
+
+- name: Clone repo
+  when: repo.stat.exists == False
+  file:
+    path: '{{ repo_path }}'
+    recurse: True
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
   tags:
     - repo

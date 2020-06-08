@@ -165,4 +165,3 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#format = 1
 let g:airline#extensions = ['branch', 'virtualenv', 'bufferline']
 let g:airline_theme='onedark'
-

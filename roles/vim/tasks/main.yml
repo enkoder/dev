@@ -1,5 +1,5 @@
 ---
-- name: Check if vimplug is installed 
+- name: Check if vimplug is installed
   stat:
     path: /home/{{ user.name }}/.vim/autoload/plug.vim
   register: plug
