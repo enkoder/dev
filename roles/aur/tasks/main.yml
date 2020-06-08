@@ -60,7 +60,7 @@
 - name: Install AUR base packages
   aur:
     name: "{{ aur.packages }}"
-    state: latest
+    state: present
   become: yes
   become_method: su
   become_user: "{{ user.name }}"

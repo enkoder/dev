@@ -13,3 +13,18 @@
     - { role: polybar, tags: ['polybar'] }
     - { role: rofi, tags: ['rofi'] }
     - { role: docker, tags: ['docker'] }
+
+- hosts: localhost
+  tasks:
+    - name: Include role to iterate over release channels
+      include_role:
+        name: discord
+      tags:
+        - discord
+      with_items:
+        - release_channel: stable
+          binary_name: Discord
+        - release_channel: ptb
+          binary_name: DiscordPTB
+        - release_channel: canary
+          binary_name: DiscordCanary

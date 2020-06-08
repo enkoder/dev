@@ -35,6 +35,8 @@
 - name:
   pacman: name=feh state=present
   become: yes
+  tags:
+    - i3
 
 - name: Symlinks wallpaper dir
   file:
@@ -43,4 +45,4 @@
     state: link
     force: yes
   tags:
-    - wallpapers
+    - i3

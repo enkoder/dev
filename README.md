@@ -1,4 +1,4 @@
 # TODO
-[ ] install i3-rounded-gaps
-[ ] gcloud
-[ ] virtualbox
+
+* virtualbox
+* lint this repo
