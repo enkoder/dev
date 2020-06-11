@@ -10,6 +10,7 @@
     - { role: sway, tags: ['sway'] }
     - { role: docker, tags: ['docker'] }
     - { role: audio, tags: ['audio'] }
+    - { role: terminal, tags: ['terminal'] }
 
 - hosts: localhost
   tasks:
