@@ -1,0 +1,23 @@
+---
+- name: Create waybar dir
+  file: path=/home/{{ user.name }}/.config/waybar state=directory
+  tags:
+    - waybar
+
+- name: Symlink config file
+  file:
+    src: '{{ repo_path }}/roles/waybar/files/config'
+    dest: '/home/{{ user.name }}/.config/waybar/config'
+    state: link
+    force: true
+  tags:
+    - waybar
+
+- name: Symlink styles
+  file:
+    src: '{{ repo_path }}/roles/waybar/files/style.css'
+    dest: '/home/{{ user.name }}/.config/waybar/style.css'
+    state: link
+    force: true
+  tags:
+    - waybar

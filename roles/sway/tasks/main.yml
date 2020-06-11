@@ -2,20 +2,23 @@
 - name: Install sway
   aur:
     name:
-      - sway-git
-      - wlroots-git
-      - swaynagbarmode
+      - swaynagmode
       - bemenu-wlroots
   tags:
     - sway
 
 - name: Install screen lock deps
+  become: yes
   pacman:
     state: present
     name:
+      - sway
+      - wlroots
       - grim
       - slurp
       - imagemagick
+  tags:
+    - sway
 
 - name: Move lock script
   become: yes

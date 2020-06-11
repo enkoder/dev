@@ -8,6 +8,7 @@
     - { role: vim, tags: ['vim'] }
     - { role: zprezto, tags: ['zprezto'] }
     - { role: sway, tags: ['sway'] }
+    - { role: waybar, tags: ['waybar'] }
     - { role: docker, tags: ['docker'] }
     - { role: audio, tags: ['audio'] }
     - { role: terminal, tags: ['terminal'] }
