@@ -1,0 +1,35 @@
+---
+- name: Install Pulse
+  pacman: name=pulseaudio
+  tags:
+    - audio
+
+- name: Make user systemd user dir exists
+  file: path=/home/{{ user.name }}/.config/systemd/user state=directory
+
+- name: Symlink service file
+  file:
+    src: '{{ repo_path }}/roles/audio/files/pulseaudio.service'
+    dest: '/home/{{ user.name }}/.config/systemd/user/pulseaudio.service'
+    state: link
+    force: true
+  notify:
+    - reload systemd user config
+  tags:
+    - audio
+
+- name: Symlink socket file
+  file:
+    src: '{{ repo_path }}/roles/audio/files/pulseaudio.socket'
+    dest: '/home/{{ user.name }}/.config/systemd/user/pulseaudio.socket'
+    state: link
+    force: true
+  notify:
+    - reload systemd user config
+  tags:
+    - audio
+
+- name: Enable and start pulseaudio service
+  systemd: name=pulseaudio.service enabled=yes state=started scope=user
+  tags:
+    - audio
