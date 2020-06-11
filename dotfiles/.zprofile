@@ -66,3 +66,5 @@ if (( $#commands[(i)lesspipe(|.sh)] )); then
 fi
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+eval `ssh-agent`

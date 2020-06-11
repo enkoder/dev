@@ -10,7 +10,11 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+# Source aliases
+if [[ -s "${ZDOTDIR:-$HOME}/.aliases.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.aliases.zsh"
+fi
+
 #compdef clid
 _clid() {
   eval $(env COMMANDLINE="${words[1,$CURRENT]}" _CLID_COMPLETE=complete-zsh  clid)
@@ -18,3 +22,6 @@ _clid() {
 if [[ "$(basename -- ${(%):-%x})" != "_clid" ]]; then
   compdef _clid clid
 fi
+
+# pyenv
+eval "$(pyenv init -)"

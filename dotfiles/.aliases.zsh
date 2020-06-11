@@ -6,3 +6,4 @@ alias gbc='git branch --merged | grep -v "\*" | grep -v master | grep -v develop
 alias diclean='docker rmi -f $(docker images | grep "<none>" | awk "{print \$3}")'
 alias dclean='docker rm $(docker ps -a -q)'
 alias dc='docker-compose'
+alias vim=nvim

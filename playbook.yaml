@@ -7,12 +7,9 @@
     - { role: dotfiles, tags: ['dotfiles'] }
     - { role: vim, tags: ['vim'] }
     - { role: zprezto, tags: ['zprezto'] }
-    - { role: x, tags: ['x'] }
-    - { role: i3, tags: ['i3'] }
-    - { role: wallpapers, tags: ['wallpapers'] }
-    - { role: polybar, tags: ['polybar'] }
-    - { role: rofi, tags: ['rofi'] }
+    - { role: sway, tags: ['sway'] }
     - { role: docker, tags: ['docker'] }
+    - { role: audio, tags: ['audio'] }
 
 - hosts: localhost
   tasks:

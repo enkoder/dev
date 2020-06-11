@@ -23,6 +23,7 @@ aur:
         - tlpui-git
         - google-cloud-sdk
 
+
 base_packages:
     - base-devel
     - ntp
@@ -32,6 +33,7 @@ base_packages:
     - tree
     - unzip
     - htop
+    - neovim
 
     # power & laptop things
     - acpi
@@ -41,7 +43,7 @@ base_packages:
     - tp_smapi
 
     # terminal
-    - rxvt-unicode
+    - alacritty
 
     # i3 & x
     - xorg-server
@@ -49,6 +51,14 @@ base_packages:
     - xorg-xrdb
     - xorg-xrandr
     - feh
+
+    # sway
+    - wl-clipboard
+    - mako
+    - python-i3ipc
+    - bemenu
+    - waybar
+    - neofetch
 
     # dev things
     - code
@@ -59,6 +69,8 @@ base_packages:
     - rsync
     - jq
     - screen
+    - virtualbox
+    - pyenv
 
     # audio
     - pulseaudio
