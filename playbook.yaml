@@ -12,6 +12,7 @@
     - { role: docker, tags: ['docker'] }
     - { role: audio, tags: ['audio'] }
     - { role: terminal, tags: ['terminal'] }
+    - { role: notifs, tags: ['notifs'] }
 
 - hosts: localhost
   tasks:

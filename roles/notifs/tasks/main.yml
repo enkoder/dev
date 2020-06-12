@@ -1,0 +1,19 @@
+---
+- name: Install mako
+  aur: name=mako state=present
+  tags:
+    - notifs
+
+- name: Create mako dir
+  file: path=/home/{{ user.name }}/.config/mako state=directory
+  tags:
+    - notifs
+
+- name: Symlink config file
+  file:
+    src: '{{ repo_path }}/roles/mako/files/mako.yml'
+    dest: '/home/{{ user.name }}/.config/mako/config'
+    state: link
+    force: true
+  tags:
+    - notifs
