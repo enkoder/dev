@@ -31,9 +31,11 @@
 
 - hosts: k8s
   roles: 
+  - { role: repo, tags: ['repo'] }
   - { role: vim, tags: ['vim']}
   - { role: aur, tags: ['aur']}
   - { role: dotfiles, tags: ['dotfiles'] }
   - { role: docker, tags: ['docker'] }
   - { role: dotfiles, tags: ['dotfiles'] }
   - { role: oh-my-zsh, tags: ['oh-my-zsh'] }
+  - { role: debug, tags: ['debug'] }
