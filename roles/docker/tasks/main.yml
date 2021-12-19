@@ -20,3 +20,9 @@
     append: yes
   tags:
     - user
+
+- name: Ensure docker has started and is enabled
+  ansible.builtin.systemd:
+    state: started
+    name: docker
+    enabled: yes

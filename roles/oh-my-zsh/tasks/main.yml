@@ -1,0 +1,19 @@
+
+---
+- name: Check if oh-my-zsh was cloned
+  stat:
+    path: '/home/{{ user.name }}/.oh-my-zsh'
+  register: ohmyzsh
+  tags:
+    - oh-my-zsh
+
+- name: Clone oh-my-zsh
+  when: ohmyzsh.stat.exists == False
+  git:
+    repo: 'https://github.com/ohmyzsh/ohmyzsh.git'
+    dest: '/home/{{ user.name }}/.oh-my-zsh'
+    update: yes
+    recursive: True
+  tags:
+    - oh-my-zsh
+

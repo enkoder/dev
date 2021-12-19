@@ -12,11 +12,13 @@
   get_url:
     url: "https://cache.agilebits.com/dist/1P/op/pkg/v{{ op_version }}/op_linux_amd64_v{{ op_version }}.zip"
     dest: "/tmp/op_linux_amd64_{{ op_version }}.zip"
+  when: ansible_distribution != 'MacOSX'
   tags:
     - 1pass
 
 - name: Unarchive zip
   when: op.stat.exists == False
+  when: ansible_distribution != 'MacOSX'
   unarchive:
     src: "/tmp/op_linux_amd64_{{ op_version }}.zip"
     dest: /tmp

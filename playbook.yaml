@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: arch-laptop
   roles:
     - { role: aur, tags: ['aur'] }
     - { role: 1pass, tags: ['1pass'] }
@@ -14,7 +14,7 @@
     - { role: terminal, tags: ['terminal'] }
     - { role: notifs, tags: ['notifs'] }
 
-- hosts: localhost
+- hosts: arch-laptop
   tasks:
     - name: Include role to iterate over release channels
       include_role:
@@ -28,3 +28,12 @@
           binary_name: DiscordPTB
         - release_channel: canary
           binary_name: DiscordCanary
+
+- hosts: k8s
+  roles: 
+  - { role: vim, tags: ['vim']}
+  - { role: aur, tags: ['aur']}
+  - { role: dotfiles, tags: ['dotfiles'] }
+  - { role: docker, tags: ['docker'] }
+  - { role: dotfiles, tags: ['dotfiles'] }
+  - { role: oh-my-zsh, tags: ['oh-my-zsh'] }
