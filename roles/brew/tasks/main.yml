@@ -1,0 +1,6 @@
+---
+- name: Install brew packages for a Mac device
+  community.general.homebrew: 
+    name: "{{ base_packages }}"
+    state: present
+    update_homebrew: yes
