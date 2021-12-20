@@ -1,5 +1,6 @@
 ---
 - name: Create AUR directory
+  when: ansible_distribution == 'Archlinux'
   file: path=/home/{{ user.name }}/{{ aur.dir }}
         state=directory
         owner={{ user.name }}
@@ -8,6 +9,7 @@
     - aur
 
 - name: Check if yay was cloned
+  when: ansible_distribution == 'Archlinux'
   stat:
     path: /home/{{ user.name }}/github.com/yay
   register: yay_git
@@ -15,6 +17,7 @@
     - aur
 
 - name: Check is yay installed
+  when: ansible_distribution == 'Archlinux'
   shell: command -v yay >/dev/null 2>&1
   register: yay
   ignore_errors: yes
@@ -22,6 +25,7 @@
     - aur
 
 - name: Clone yay
+  when: ansible_distribution == 'Archlinux'
   when: yay_git.stat.exists == False
   git:
     repo: 'https://aur.archlinux.org/yay.git'
@@ -33,11 +37,13 @@
     - aur
 
 - name: Install yay deps
+  when: ansible_distribution == 'Archlinux'
   pacman: name=go state=present
   tags:
     - aur
 
 - name: Install yay
+  when: ansible_distribution == 'Archlinux'
   when: yay.rc != 0
   shell:
     cmd: makepkg -i -f --noconfirm
@@ -48,6 +54,7 @@
     - aur
 
 - name: Upgrade aur
+  when: ansible_distribution == 'Archlinux'
   aur:
     upgrade: yes
     aur_only: yes
@@ -58,6 +65,7 @@
     - aur
 
 - name: Install AUR base packages
+  when: ansible_distribution == 'Archlinux'
   aur:
     name: "{{ aur.packages }}"
     state: present

@@ -1,24 +1,43 @@
 ---
+- name: Copy pacman configuration file
+  become: yes
+  copy:
+    src: pacman.conf
+    dest: /etc/pacman.conf
+
+- name: Refresh pacman mirrors
+  become: yes
+  pacman:
+    update_cache: yes
+
 - name: Install universal base packages
+  when: ansible_distribution == 'Archlinux'
   pacman:
       name: "{{ base_packages }}"
       state: present
+  become: yes
   tags:
     - packages
 
 - name: Create pacman hook directory
+  become: yes
   file: path=/etc/pacman.d/hooks
         state=directory
+  when: ansible_distribution == 'Archlinux'
   tags:
     - packages
 
 - name: Use all cores when compressing packages
+  become: yes
+  when: ansible_distribution == 'Archlinux'
   lineinfile:
     dest: /etc/makepkg.conf
     regexp: "^COMPRESSXZ"
     line: "COMPRESSXZ=(xz -c -z - --threads=0)"
 
 - name: Push pacman cache cleanup service
+  become: yes
+  when: ansible_distribution == 'Archlinux'
   copy: src=paccache.service dest=/etc/systemd/system/paccache.service
   notify:
     - reload systemd config
@@ -26,6 +45,8 @@
     - packages
 
 - name: Push pacman cache cleanup timer
+  become: yes
+  when: ansible_distribution == 'Archlinux'
   copy: src=paccache.timer dest=/etc/systemd/system/paccache.timer
   notify:
     - reload systemd config
@@ -34,6 +55,8 @@
     - packages
 
 - name: Enable and start pacman cache cleanup timer
+  become: yes
+  when: ansible_distribution == 'Archlinux'
   service: name=paccache.timer enabled=yes state=started
   tags:
     - packages

@@ -1,26 +1,30 @@
+---
 aur:
-    dir: aur
-    packages:
-        - 1password-cli
-        - starship
+  dir: aur
+  packages:
+    - 1password-cli
+    - starship
+
 
 base_packages:
-    - base-devel
-    - ntp
-    - man-db
-    - man-pages
-    - pacman-contrib
-    - tree
-    - unzip
-    - htop
-    - neovim
-    - wmname
+  - base-devel
+  - ntp
+  - man-db
+  - man-pages
+  - pacman-contrib
+  - tree
+  - unzip
+  - htop
+  - neovim
+  - wmname
 
-    # dev things
-    - docker
-    - python-pip
-    - tmux
-    - git
-    - rsync
-    - jq
-    - screen
+  # dev things
+  - docker
+  - python-pip
+  - tmux
+  - git
+  - rsync
+  - jq
+  - screen
+  - zsh
+  - bash

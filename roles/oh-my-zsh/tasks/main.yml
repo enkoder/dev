@@ -1,8 +1,23 @@
 
 ---
+- user:
+    name: "{{ user.name }}"
+  register: user_var
+
+- name: Install ZSH
+  become: yes
+  when: ansible_distribution == 'Archlinux'
+  pacman:
+    name:
+      - zsh
+      - zsh-completions
+    state: present
+  tags:
+    - oh-my-zsh
+
 - name: Check if oh-my-zsh was cloned
   stat:
-    path: '/home/{{ user.name }}/.oh-my-zsh'
+    path: '{{ user_var.home }}/.oh-my-zsh'
   register: ohmyzsh
   tags:
     - oh-my-zsh
@@ -11,9 +26,25 @@
   when: ohmyzsh.stat.exists == False
   git:
     repo: 'https://github.com/ohmyzsh/ohmyzsh.git'
-    dest: '/home/{{ user.name }}/.oh-my-zsh'
+    dest: '{{ user_var.home }}/.oh-my-zsh'
     update: yes
     recursive: True
   tags:
     - oh-my-zsh
 
+- name: Check if zsh-autosuggestions was cloned
+  stat:
+    path: '{{ user_var.home }}/.oh-my-zsh/plugins/zsh-autosuggestions'
+  register: zsha
+  tags:
+    - oh-my-zsh
+
+- name: Clone zsh-autocomplete
+  when: zsha.stat.exists == False
+  git:
+    repo: 'https://github.com/zsh-users/zsh-autosuggestions'
+    dest: '{{ user_var.home }}/.oh-my-zsh/plugins/zsh-autosuggestions'
+    update: yes
+    recursive: True
+  tags:
+    - oh-my-zsh

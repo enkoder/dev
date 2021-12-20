@@ -35,11 +35,15 @@
   - { role: dotfiles, tags: ['dotfiles'] }
 
 - hosts: k8s
+  vars_prompt:
+    - name: user_password
+      prompt: "Enter desired user password"
   roles: 
-  #- { role: repo, tags: ['repo'] }
-  #- { role: vim, tags: ['vim']}
-  #- { role: aur, tags: ['aur']}
-  #- { role: docker, tags: ['docker'] }
+  - { role: user, tags: ['user'] }
+  - { role: sudo, tags: ['sudo'] }
+  - { role: pacman, tags: ['pacman'] }
+  - { role: aur, tags: ['aur'] }
+  - { role: repo, tags: ['repo'] }
+  - { role: vim, tags: ['vim']}
+  - { role: docker, tags: ['docker'] }
   - { role: oh-my-zsh, tags: ['oh-my-zsh'] }
-  - { role: dotfiles, tags: ['dotfiles'] }
-  #- { role: debug, tags: ['debug'] }
