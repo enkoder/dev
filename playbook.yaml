@@ -29,13 +29,17 @@
         - release_channel: canary
           binary_name: DiscordCanary
 
+- hosts: mac-laptop
+  roles:
+  - { role: repo, tags: ['repo'] }
+  - { role: dotfiles, tags: ['dotfiles'] }
+
 - hosts: k8s
   roles: 
-  - { role: repo, tags: ['repo'] }
-  - { role: vim, tags: ['vim']}
-  - { role: aur, tags: ['aur']}
-  - { role: dotfiles, tags: ['dotfiles'] }
-  - { role: docker, tags: ['docker'] }
-  - { role: dotfiles, tags: ['dotfiles'] }
+  #- { role: repo, tags: ['repo'] }
+  #- { role: vim, tags: ['vim']}
+  #- { role: aur, tags: ['aur']}
+  #- { role: docker, tags: ['docker'] }
   - { role: oh-my-zsh, tags: ['oh-my-zsh'] }
-  - { role: debug, tags: ['debug'] }
+  - { role: dotfiles, tags: ['dotfiles'] }
+  #- { role: debug, tags: ['debug'] }

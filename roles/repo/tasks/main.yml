@@ -1,17 +1,4 @@
 ---
-- name: Install pip
-  pacman: name=python-pip state=present
-  tags:
-    - repo
-
-- name: Install linter
-  pip:
-    name:
-      - ansible-lint
-      - pre-commit
-  tags:
-    - repo
-
 - name: Check if dev was cloned
   stat:
     path: '{{ repo_path }}'
@@ -20,7 +7,8 @@
     - repo
 
 - name: Make repo
-  file: path={{ repo_path | dirname }} state=directory
+  file: path={{ repo_path }} state=directory
+  when: repo.stat.exists == False
 
 - name: Clone repo
   when: repo.stat.exists == False
