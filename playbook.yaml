@@ -41,6 +41,7 @@
   roles: 
   - { role: user, tags: ['user'] }
   - { role: sudo, tags: ['sudo'] }
+  - { role: hostname, tags: ['hostname'] }
   - { role: pacman, tags: ['pacman'] }
   - { role: aur, tags: ['aur'] }
   - { role: repo, tags: ['repo'] }
