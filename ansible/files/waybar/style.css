@@ -1,0 +1,52 @@
+* {
+  color: rgba(236, 239, 244, 255);
+  background: none;
+  font-family: "Source Code Pro";
+}
+
+#battery {
+  font-size: 16px;
+  padding: 5px 8px 0px 8px;
+  margin: 5px 0 0 0;
+}
+
+#clock {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-size: 16px;
+  padding: 5px 8px 0px 8px;
+  margin: 5px 10px 0 0;
+}
+
+#pulseaudio {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-size: 16px;
+  padding: 5px 8px 0px 8px;
+  margin: 5px 10px 0 0;
+}
+
+#workspaces {
+  margin-left: 10px;
+}
+
+#workspaces button {
+  padding: 1px 5px 0px 5px;
+  margin: 5px 0 0 0;
+  background-color: transparent;
+  color: #ffffff;
+  border-bottom: 3px solid transparent;
+}
+
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: inherit;
+}
+
+#workspaces button.focused {
+    background-color: #282c34;
+}
+
+#workspaces button.urgent {
+    background-color: #c678dd;
+}

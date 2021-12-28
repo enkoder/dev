@@ -1,0 +1,9 @@
+markup=1
+actions=1
+
+# Format
+font=SF Mono Powerline
+border-color=#282c34
+border-size=8
+background-color=#5c6370
+text-color=#abb2bf
