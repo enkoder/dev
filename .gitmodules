@@ -4,9 +4,3 @@
 [submodule "library/ansible-yay"]
 	path = library/ansible-yay
 	url = https://github.com/mnussbaum/ansible-yay.git
-[submodule "cue.mod/pkg/adieu/cue-ansible"]
-	path = cue.mod/pkg/adieu/cue-ansible
-	url = https://github.com/adieu/cue-ansible.git
-[submodule "cue.mod/pkg/github.com/adieu/cue-ansible"]
-	path = cue.mod/pkg/github.com/adieu/cue-ansible
-	url = https://github.com/adieu/cue-ansible.git
