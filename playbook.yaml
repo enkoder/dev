@@ -13,6 +13,7 @@
     - { role: audio, tags: ['audio'] }
     - { role: terminal, tags: ['terminal'] }
     - { role: notifs, tags: ['notifs'] }
+    - { role: redshift, tags: ['redshift'] }
 
 - hosts: arch-laptop
   tasks:
