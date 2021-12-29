@@ -1,6 +1,6 @@
 package ansible
 
-#OnepassTask: #GenericTask & {
+#OnepassTask: #ArchTask & {
 	tags: ["onepass"]
 }
 
@@ -14,7 +14,7 @@ package ansible
 	},
 	#OnepassTask & {
 		name: "Download zip"
-		when: "op.stat.exists == False"
+		when: #ArchTask.when + ["op.stat.exists == False"]
 		get_url: {
 			url:  "https://cache.agilebits.com/dist/1P/op/pkg/v{{ op_version }}/op_linux_amd64_v{{ op_version }}.zip"
 			dest: "/tmp/op_linux_amd64_{{ op_version }}.zip"
@@ -22,23 +22,33 @@ package ansible
 	},
 	#OnepassTask & {
 		name: "Unarchive zip"
-		when: "op.stat.exists == False"
-		when: "ansible_distribution != 'MacOSX'"
+		when: #ArchTask.when + ["op.stat.exists == False"]
 		unarchive: {
 			src:  "/tmp/op_linux_amd64_{{ op_version }}.zip"
 			dest: "/tmp"
 		}
 	},
 	#OnepassTask & {
-		name: "Moves op to /usr/local/bin"
-		when: "op.stat.exists == False"
+		name:   "Moves op to /usr/local/bin"
+		become: "yes"
+		when:   #ArchTask.when + ["op.stat.exists == False"]
 		copy: {
 			owner: "{{ user.name }}"
 			group: "{{ user.group }}"
 			src:   "/tmp/op"
-			dest:  "/usr/local/bin/op"
+			dest:  "/usr/local/bin/op-{{ op_version }}"
 			mode:  "u+rwx"
 		}
+	},
+	#OnepassTask & {
+		name:   "Links versioned op to op"
+		when:   #ArchTask.when + ["op.stat.exists == False"]
 		become: "yes"
+		file: {
+			src:   "/usr/local/bin/op-{{ op_version }}"
+			dest:  "/usr/local/bin/op"
+			state: "link"
+			force: "yes"
+		}
 	},
 ]

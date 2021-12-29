@@ -10,3 +10,7 @@ mac-laptop:
 arch-laptop:
 	cue export --force --out=yaml --outfile playbook.yaml arch-laptop.cue
 	$(cmd) --limit arch-laptop playbook.yaml
+
+k8s:
+	cue export --force --out=yaml --outfile playbook.yaml k8s.cue
+	$(cmd) --limit k8s playbook.yaml

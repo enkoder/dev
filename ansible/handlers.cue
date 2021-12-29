@@ -8,6 +8,7 @@ H_STOP_SYSTEMD_USER:   "stop systemd per-user instance"
 
 #ReloadSystemdHandler: #ArchTask & {
 	name:    H_RELOAD_SYSTEMD
+	become:  "yes"
 	command: "systemctl daemon-reload"
 }
 
@@ -17,7 +18,8 @@ H_STOP_SYSTEMD_USER:   "stop systemd per-user instance"
 }
 
 #RestartPaccacheHandler: #ArchTask & {
-	name: H_RESTART_PACCACHE
+	name:   H_RESTART_PACCACHE
+	become: "yes"
 	service: {
 		name:  "paccache.timer"
 		state: "restarted"
