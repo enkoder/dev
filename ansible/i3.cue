@@ -1,7 +1,7 @@
 package ansible
 
 #i3Task: #ArchTask & {
-	tags: ["hostname"]
+	tags: ["i3"]
 }
 
 #i3: [
@@ -51,7 +51,7 @@ package ansible
 		name: "Symlinks wallpaper dir"
 		file: {
 			src:   "{{ repo_path }}/ansible/files/wallpapers"
-			dest:  "/home/{{ user.name }}/wallpapers"
+			dest:  "{{ user_var.home }}/wallpapers"
 			state: "link"
 			force: "yes"
 		}

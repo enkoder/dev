@@ -33,6 +33,7 @@ let socket_file = """
 	"""
 
 #pulseaudio: [
+	#PulseTask & #FetchUserTask & {},
 	#PulseTask & {
 		name:   "Install Pulse"
 		pacman: "name=pulseaudio"
@@ -43,11 +44,10 @@ let socket_file = """
 	},
 	#PulseTask & {
 		name: "Symlink service file"
-		file: {
-			contents: service_file
-			dest:     "/home/{{ user.name }}/.config/systemd/user/pulseaudio.service"
-			state:    "link"
-			force:    true
+		copy: {
+			content: service_file
+			dest:    "{{ user_var.home }}/.config/systemd/user/pulseaudio.service"
+			force:   true
 		}
 		notify: [
 			"reload systemd user config",
@@ -55,10 +55,9 @@ let socket_file = """
 	},
 	#PulseTask & {
 		name: "Symlink socket file"
-		file: {
+		copy: {
 			content: socket_file
-			dest:    "/home/{{ user.name }}/.config/systemd/user/pulseaudio.socket"
-			state:   "link"
+			dest:    "{{ user_var.home }}/.config/systemd/user/pulseaudio.socket"
 			force:   true
 		}
 		notify: [

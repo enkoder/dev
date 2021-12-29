@@ -6,19 +6,21 @@ package ansible
 
 #notifications: [
 	#NotificationsTask & #FetchUserTask & {},
-	#i3Task & {
+	#NotificationsTask & {
 		name: "Install mako"
 		aur: {
 			name:  "mako"
 			state: "present"
 		}
 	},
-	#i3Task & {
+	#NotificationsTask & {
 		name: "Create mako dir"
-		file:
-			path: "{{ user_var.home }}/.config/mako state=directory"
+		file: {
+			path:  "{{ user_var.home }}/.config/mako"
+			state: "directory"
+		}
 	},
-	#i3Task & {
+	#NotificationsTask & {
 		name: "Symlink config file"
 		file: {
 			src:   "{{ repo_path }}/ansible/files/mako/config"

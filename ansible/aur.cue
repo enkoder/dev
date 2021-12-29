@@ -5,10 +5,11 @@ package ansible
 }
 
 #aur: [
+	#AURTask & #FetchUserTask & {},
 	#AURTask & {
 		name: "Create AUR directory"
 		file: {
-			path:  "/home/{{ user.name }}/{{ aur.dir }}"
+			path:  "{{ user_var.home }}/{{ aur.dir }}"
 			state: "directory"
 			owner: "{{ user.name }}"
 			group: "{{ user.group }}"
@@ -16,7 +17,7 @@ package ansible
 	},
 	#AURTask & {
 		name: "Check if yay was cloned"
-		stat: path: "/home/{{ user.name }}/github.com/yay"
+		stat: path: "{{ user_var.home }}/github.com/yay"
 		register: "yay_git"
 	},
 	#AURTask & {
@@ -32,7 +33,7 @@ package ansible
 		become_user: "{{ user.name }}"
 		git: {
 			repo: "https://aur.archlinux.org/yay.git"
-			dest: "/home/{{ user.name }}/github.com/yay"
+			dest: "{{ user_var.home }}/github.com/yay"
 		}
 	},
 	#AURTask & {
@@ -49,7 +50,7 @@ package ansible
 		//when:        #AURTask.when + ["yay.rc != 0"]
 		shell: {
 			cmd:   "makepkg -i -f --noconfirm"
-			chdir: "/home/{{ user.name }}/github.com/yay"
+			chdir: "{{ user_var.home }}/github.com/yay"
 		}
 	},
 	#AURTask & {

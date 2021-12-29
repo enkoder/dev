@@ -7,8 +7,9 @@ package ansible
 #vim: [
 	#VimTask & #FetchUserTask & {},
 	#VimTask & {
-		name:   "Install vim & neovim"
-		become: "yes"
+		name:        "Install vim & neovim"
+		become:      "yes"
+		become_user: "{{ user.name }}"
 		pacman: {
 			state: "present"
 			name: [
@@ -50,7 +51,7 @@ package ansible
 		name: "Symlink vimrc file"
 		file: {
 			src:   "{{ repo_path }}/ansible/files/vim/vimrc"
-			dest:  "/home/{{ user.name }}/.vimrc"
+			dest:  "{{ user_var.home }}/.vimrc"
 			state: "link"
 			force: true
 		}

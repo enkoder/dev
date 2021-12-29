@@ -5,8 +5,6 @@ package ansible
 }
 
 let sudoers_file = """
-	## {{ ansible_managed }}
-	##
 	## User privilege specification
 	##
 	root ALL=(ALL) ALL
@@ -27,7 +25,7 @@ let sudoers_file = """
 	#SudoTask & {
 		name:   "Copy sudo configuration"
 		become: "yes"
-		template: {
+		copy: {
 			content:  sudoers_file
 			dest:     "/etc/sudoers"
 			mode:     440

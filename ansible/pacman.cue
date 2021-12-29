@@ -55,8 +55,8 @@ let paccache_service = """
 		name:   "Copy pacman configuration file"
 		become: "yes"
 		copy: {
-			contents: pacman_conf
-			dest:     "/etc/pacman.conf"
+			content: pacman_conf
+			dest:    "/etc/pacman.conf"
 		}
 	},
 	#PacmanTask & {
@@ -93,8 +93,8 @@ let paccache_service = """
 		name:   "Push pacman cache cleanup service"
 		become: "yes"
 		copy: {
-			contents: paccache_service
-			dest:     "/etc/systemd/system/paccache.service"
+			content: paccache_service
+			dest:    "/etc/systemd/system/paccache.service"
 		}
 		// TODO: add notify meta handlers
 		//notify: ["reload systemd config"]
@@ -103,8 +103,8 @@ let paccache_service = """
 		name:   "Push pacman cache cleanup timer"
 		become: "yes"
 		copy: {
-			contents: paccache_timer
-			dest:     "/etc/systemd/system/paccache.timer"
+			content: paccache_timer
+			dest:    "/etc/systemd/system/paccache.timer"
 		}
 		// TODO: add notify meta handlers
 		//notify: [
