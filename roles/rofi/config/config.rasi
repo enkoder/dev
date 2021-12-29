@@ -1,6 +1,0 @@
-configuration {
-    theme: "nord";
-    modi: "window,drun,ssh,combi";
-    font: "Monaco 13";
-    combi-modi: "window,drun,ssh";
-}

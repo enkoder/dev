@@ -1,3 +1,0 @@
----
-- name: stop systemd per-user instance
-  service: name="user@{{ user.uid }}" state=stopped

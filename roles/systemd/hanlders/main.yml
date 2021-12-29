@@ -1,6 +1,0 @@
----
-- name: reload systemd config
-  command: systemctl daemon-reload
-
-- name: reload systemd user config
-  command: systemctl --user daemon-reload

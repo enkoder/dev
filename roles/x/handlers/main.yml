@@ -1,4 +1,0 @@
----
-- name: reload xrdb
-  command:
-    cmd: xrdb -merge /home/{{ user.name }}/.Xresources
