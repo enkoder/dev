@@ -5,6 +5,7 @@ package ansible
 	tags: [...string]
 	when?:     string | [...string]
 	register?: string | [...string]
+	notify?: [...string]
 	...
 }
 

@@ -5,6 +5,13 @@ import "github.com/enkoder/dev/ansible"
 	tasks: ansible.#user + ansible.#sudo + ansible.#pacman + ansible.#aur + ansible.#pulseaudio +
 		ansible.#sway + ansible.#waybar + ansible.#notifications + ansible.#rofi +
 		ansible.#omz + ansible.#vim
+	handlers: [
+		ansible.#ReloadSystemdHandler,
+		ansible.#ReloadUserSystemdHandler,
+		ansible.#ReloadXRDBHandler,
+		ansible.#RestartPaccacheHandler,
+		ansible.#StopSystemdUserHandler,
+	]
 	vars_prompt: [
 		{name: "user_password", prompt: "Enter desired user password"},
 	]

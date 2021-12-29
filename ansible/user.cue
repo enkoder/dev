@@ -46,7 +46,6 @@ package ansible
 			name:  "user@{{ user.uid }}"
 			state: "started"
 		}
-		//TODO figure out notifiy
-		//notify: "stop systemd per-user instance"
+		notify: [H_STOP_SYSTEMD_USER]
 	},
 ]

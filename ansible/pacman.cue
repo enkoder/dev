@@ -96,8 +96,7 @@ let paccache_service = """
 			content: paccache_service
 			dest:    "/etc/systemd/system/paccache.service"
 		}
-		// TODO: add notify meta handlers
-		//notify: ["reload systemd config"]
+		notify: [H_RELOAD_SYSTEMD]
 	},
 	#PacmanTask & {
 		name:   "Push pacman cache cleanup timer"
@@ -106,11 +105,7 @@ let paccache_service = """
 			content: paccache_timer
 			dest:    "/etc/systemd/system/paccache.timer"
 		}
-		// TODO: add notify meta handlers
-		//notify: [
-		// "reload systemd config",
-		// "restart paccache",
-		//]
+		notify: [H_RELOAD_SYSTEMD, H_RESTART_PACCACHE]
 	},
 	#PacmanTask & {
 		name:   "Enable and start pacman cache cleanup timer"

@@ -8,12 +8,12 @@ let service_file = """
 	[Unit]
 	Description=Pulseaudio Sound Service
 	Requires=pulseaudio.socket
-	
+
 	[Service]
 	Type=notify
 	ExecStart=/usr/bin/pulseaudio --verbose --daemonize=no
 	Restart=on-failure
-	
+
 	[Install]
 	Also=pulseaudio.socket
 	WantedBy=default.target
@@ -22,12 +22,12 @@ let service_file = """
 let socket_file = """
 	[Unit]
 	Description=Pulseaudio Sound System
-	
+
 	[Socket]
 	Priority=6
 	Backlog=5
 	ListenStream=%t/pulse/native
-	
+
 	[Install]
 	WantedBy=sockets.target
 	"""
@@ -49,9 +49,7 @@ let socket_file = """
 			dest:    "{{ user_var.home }}/.config/systemd/user/pulseaudio.service"
 			force:   true
 		}
-		notify: [
-			"reload systemd user config",
-		]
+		notify: [H_RELOAD_USER_SYSTEMD]
 	},
 	#PulseTask & {
 		name: "Symlink socket file"
@@ -60,9 +58,7 @@ let socket_file = """
 			dest:    "{{ user_var.home }}/.config/systemd/user/pulseaudio.socket"
 			force:   true
 		}
-		notify: [
-			"reload systemd user config",
-		]
+		notify: [H_RELOAD_USER_SYSTEMD]
 	},
 	#PulseTask & {
 		name: "Enable and start pulseaudio service"
