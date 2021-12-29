@@ -19,16 +19,15 @@ package ansible
 	},
 	#RepoTask & {
 		name: "Clone repo"
-		when: "repo.stat.exists == False"
 		git: {
-			repo:      'https://github.com/enkoder/dev.git'
+			repo:      "https://github.com/enkoder/dev.git"
 			dest:      "{{ repo_path }}"
 			recursive: true
 			update:    "yes"
 		}
 	},
 	#RepoTask & {
-		name: "Clone repo"
+		name: "Update ownership of repo"
 		when: "repo.stat.exists == False"
 		file: {
 			path:    "{{ repo_path }}"

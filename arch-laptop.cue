@@ -38,7 +38,6 @@ import "github.com/enkoder/dev/ansible"
 				"google-chrome",
 				"spotify",
 				"tlpui",
-				"git",
 				"google-cloud-sdk",
 				"starship"]
 		}

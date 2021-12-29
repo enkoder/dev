@@ -13,7 +13,9 @@ import "github.com/enkoder/dev/ansible"
 
 [ansible.#Playbook & {
 	hosts: "k8s"
-	tasks: ansible.#user + ansible.#sudo + ansible.#pacman + ansible.#onepass
+	tasks: ansible.#user + ansible.#sudo + ansible.#pacman + ansible.#onepass +
+		ansible.#aur + ansible.#repo + ansible.#dotfiles + ansible.#tailscale +
+		ansible.#vim + ansible.#omz + ansible.#k8s
 	vars_prompt: [
 		{name: "user_password", prompt: "Enter desired user password"},
 	]
@@ -28,8 +30,16 @@ import "github.com/enkoder/dev/ansible"
 			// base stuff
 			"base", "ntp", "man-db", "man-pages", "pacman-contrib", "wmname", "inetutils", "openssh",
 			// dev things
-			"vi", "neovim", "docker", "python-pip", "tmux", "git", "rsync", "jq", "screen", "tree", "unzip", "htop",
+			"vi", "neovim", "docker", "python-pip", "tmux", "git", "rsync", "jq", "screen", "tree",
+			"unzip", "htop", "nodejs",
 		]
+		aur: {
+			dir: "aur"
+			packages: [
+				"starship",
+			]
+		}
+
 		repo_path:  "/home/enkoder/github.com/enkoder/dev"
 		user:       #User
 		op_version: "1.12.3"

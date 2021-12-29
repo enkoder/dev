@@ -47,7 +47,7 @@ package ansible
 		name:        "Install yay"
 		become:      "yes"
 		become_user: "{{ user.name }}"
-		//when:        #AURTask.when + ["yay.rc != 0"]
+		when:        #AURTask.when + ["yay.rc != 0"]
 		shell: {
 			cmd:   "makepkg -i -f --noconfirm"
 			chdir: "{{ user_var.home }}/github.com/yay"
