@@ -4,7 +4,7 @@ import "github.com/enkoder/dev/ansible"
 	hosts: "arch-laptop"
 	tasks: ansible.#user + ansible.#sudo + ansible.#pacman + ansible.#aur + ansible.#pulseaudio +
 		ansible.#sway + ansible.#waybar + ansible.#notifications + ansible.#rofi +
-		ansible.#omz + ansible.#vim
+		ansible.#omz + ansible.#vim + ansible.#redshift
 	handlers: [
 		ansible.#ReloadSystemdHandler,
 		ansible.#ReloadUserSystemdHandler,
