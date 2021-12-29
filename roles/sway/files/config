@@ -37,6 +37,9 @@ set $menu bemenu-run -i \
     --sb=$background \
     --fn $font | xargs swaymsg exec
 
+for_window [instance=".*code.*"] opacity .98
+for_window [instance=".*discord.*"] opacity .98
+
 # Home row direction keys, like vim
 set $left h
 set $down j
